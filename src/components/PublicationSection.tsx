@@ -39,11 +39,11 @@ const PublicationSection = ({ publications }: PublicationSectionProps) => {
   }));
 
   return (
-    <Card className="p-4 mb-6">
-      <h2 className="section-title mb-4">Publicações Acadêmicas</h2>
+    <Card className="p-6 mb-6 shadow-md border border-orcid-gray/10">
+      <h2 className="section-title mb-6 text-orcid-accent">Publicações Acadêmicas</h2>
       
       {publicationCounts.length === 0 ? (
-        <p className="text-gray-500">Nenhuma publicação encontrada.</p>
+        <p className="text-orcid-gray">Nenhuma publicação encontrada.</p>
       ) : (
         <>
           {['Journal Article', 'Conference Paper', 'Book Chapter'].map((type) => {
@@ -53,19 +53,19 @@ const PublicationSection = ({ publications }: PublicationSectionProps) => {
             return (
               <div key={type} className="mb-6">
                 <div 
-                  className="accordion-header"
+                  className="accordion-header hover:bg-orcid-secondary/10"
                   onClick={() => toggleExpand(type)}
                 >
-                  <h3 className="font-medium">{type} ({typePubs.length})</h3>
+                  <h3 className="font-medium text-orcid-dark">{type} ({typePubs.length})</h3>
                   {expandedTypes[type] ? (
-                    <ChevronUp className="w-5 h-5" />
+                    <ChevronUp className="w-5 h-5 text-orcid-accent" />
                   ) : (
-                    <ChevronDown className="w-5 h-5" />
+                    <ChevronDown className="w-5 h-5 text-orcid-accent" />
                   )}
                 </div>
                 
                 {expandedTypes[type] && (
-                  <div className="mt-2 space-y-4">
+                  <div className="mt-4 space-y-4">
                     {typePubs.map((pub, index) => (
                       <PublicationItem key={index} publication={pub} />
                     ))}

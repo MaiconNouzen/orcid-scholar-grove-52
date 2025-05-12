@@ -12,7 +12,7 @@ import { Project } from '../types';
 
 const ProjectsManager = () => {
   const { toast } = useToast();
-  const [projects, setProjects] = useState<Project[]>(mockResearcherData.projects);
+  const [projects, setProjects] = useState<Project[]>(mockResearcherData.projects as Project[]);
   const [newProject, setNewProject] = useState<Omit<Project, 'id' | 'publications'>>({
     title: '',
     description: '',
@@ -77,8 +77,8 @@ const ProjectsManager = () => {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <Card className="p-6 mb-6">
-        <h2 className="text-2xl font-serif font-semibold text-orcid-dark mb-4">Novo Projeto</h2>
+      <Card className="p-6 mb-6 shadow-md border border-orcid-gray/10">
+        <h2 className="text-2xl font-serif font-semibold text-orcid-accent mb-4">Novo Projeto</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div className="md:col-span-2">
@@ -88,6 +88,7 @@ const ProjectsManager = () => {
               value={newProject.title}
               onChange={handleChange}
               placeholder="Título do projeto"
+              className="border-orcid-gray/20"
             />
           </div>
         </div>
@@ -100,6 +101,7 @@ const ProjectsManager = () => {
             onChange={handleChange}
             placeholder="Descrição do projeto"
             rows={3}
+            className="border-orcid-gray/20"
           />
         </div>
         
@@ -112,6 +114,7 @@ const ProjectsManager = () => {
               value={newProject.startYear}
               onChange={handleChange}
               placeholder="Ano de início"
+              className="border-orcid-gray/20"
             />
           </div>
           <div>
@@ -122,6 +125,7 @@ const ProjectsManager = () => {
               value={newProject.endYear}
               onChange={handleChange}
               placeholder="Ano de término"
+              className="border-orcid-gray/20"
             />
           </div>
         </div>
@@ -134,6 +138,7 @@ const ProjectsManager = () => {
               value={newProject.fundingAgency}
               onChange={handleChange}
               placeholder="Nome da agência"
+              className="border-orcid-gray/20"
             />
           </div>
           <div>
@@ -143,58 +148,61 @@ const ProjectsManager = () => {
               value={newProject.role}
               onChange={handleChange}
               placeholder="Seu papel"
+              className="border-orcid-gray/20"
             />
           </div>
         </div>
         
         <div className="flex justify-end">
-          <Button onClick={saveProject} className="bg-orcid-green hover:bg-orcid-green/90">
+          <Button onClick={saveProject} className="bg-orcid-accent hover:bg-orcid-accent/90">
             <Save className="h-4 w-4 mr-2" />
             Salvar Projeto
           </Button>
         </div>
       </Card>
       
-      <Card className="p-6">
-        <h2 className="text-2xl font-serif font-semibold text-orcid-dark mb-4">Projetos Cadastrados</h2>
+      <Card className="p-6 shadow-md border border-orcid-gray/10">
+        <h2 className="text-2xl font-serif font-semibold text-orcid-accent mb-4">Projetos Cadastrados</h2>
         
         {projects.length > 0 ? (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Título</TableHead>
-                <TableHead>Período</TableHead>
-                <TableHead>Agência</TableHead>
-                <TableHead>Publicações</TableHead>
-                <TableHead>Ações</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {projects.map((project) => (
-                <TableRow key={project.id}>
-                  <TableCell className="font-medium">{project.title}</TableCell>
-                  <TableCell>
-                    {project.startYear} - {project.endYear || 'Atual'}
-                  </TableCell>
-                  <TableCell>{project.fundingAgency}</TableCell>
-                  <TableCell>
-                    {project.publications ? project.publications.length : 0}
-                  </TableCell>
-                  <TableCell>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      onClick={() => deleteProject(project.id)}
-                    >
-                      <Trash className="h-4 w-4 text-red-500" />
-                    </Button>
-                  </TableCell>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-orcid-dark">Título</TableHead>
+                  <TableHead className="text-orcid-dark">Período</TableHead>
+                  <TableHead className="text-orcid-dark">Agência</TableHead>
+                  <TableHead className="text-orcid-dark">Publicações</TableHead>
+                  <TableHead className="text-orcid-dark">Ações</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {projects.map((project) => (
+                  <TableRow key={project.id} className="hover:bg-orcid-light">
+                    <TableCell className="font-medium">{project.title}</TableCell>
+                    <TableCell>
+                      {project.startYear} - {project.endYear || 'Atual'}
+                    </TableCell>
+                    <TableCell>{project.fundingAgency}</TableCell>
+                    <TableCell>
+                      {project.publications ? project.publications.length : 0}
+                    </TableCell>
+                    <TableCell>
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        onClick={() => deleteProject(project.id)}
+                      >
+                        <Trash className="h-4 w-4 text-red-500" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         ) : (
-          <p className="text-gray-500 text-center py-4">Nenhum projeto cadastrado</p>
+          <p className="text-orcid-gray text-center py-4">Nenhum projeto cadastrado</p>
         )}
       </Card>
     </div>

@@ -8,35 +8,10 @@ import ProjectSection from './ProjectSection';
 import PublicationChart from './PublicationChart';
 import { mockResearcherData } from '../data/mockData';
 import { Button } from '@/components/ui/button';
-import { Project, Publication } from '../types';
-
-interface Researcher {
-  name: string;
-  orcidId: string;
-  institution: string;
-  department: string;
-  role: string;
-  email: string;
-  bio: string;
-  education: string[];
-  researchInterests: string[];
-  socialLinks: {
-    twitter?: string;
-    linkedin?: string;
-    googleScholar?: string;
-    github?: string;
-  };
-  institutionalPage: string;
-  externalLinks: {
-    name: string;
-    url: string;
-  }[];
-  publications: Publication[];
-  projects: Project[];
-}
+import { Project, Publication, Researcher } from '../types';
 
 const ResearcherProfile = () => {
-  const [researcher, setResearcher] = useState<Researcher>(mockResearcherData);
+  const [researcher, setResearcher] = useState<Researcher>(mockResearcherData as Researcher);
   const [loading, setLoading] = useState(false);
   const [displayMode, setDisplayMode] = useState<'publications' | 'projects' | 'both'>('both');
 
@@ -52,7 +27,7 @@ const ResearcherProfile = () => {
       
       // For now, we use our mock data
       setTimeout(() => {
-        setResearcher(mockResearcherData);
+        setResearcher(mockResearcherData as Researcher);
         setLoading(false);
       }, 800);
     };
@@ -67,7 +42,7 @@ const ResearcherProfile = () => {
           <div className="animate-pulse mb-4">
             <div className="h-8 bg-orcid-light rounded w-64 mx-auto"></div>
           </div>
-          <p className="text-lg text-gray-600">Carregando perfil do pesquisador...</p>
+          <p className="text-lg text-orcid-gray">Carregando perfil do pesquisador...</p>
         </div>
       </div>
     );
@@ -81,21 +56,21 @@ const ResearcherProfile = () => {
         <Button
           variant={displayMode === 'publications' ? 'default' : 'outline'}
           onClick={() => setDisplayMode('publications')}
-          className={displayMode === 'publications' ? 'bg-orcid-green hover:bg-orcid-green/90' : ''}
+          className={displayMode === 'publications' ? 'bg-orcid-accent hover:bg-orcid-accent/90 text-white' : ''}
         >
           Publicações
         </Button>
         <Button
           variant={displayMode === 'projects' ? 'default' : 'outline'}
           onClick={() => setDisplayMode('projects')}
-          className={displayMode === 'projects' ? 'bg-orcid-green hover:bg-orcid-green/90' : ''}
+          className={displayMode === 'projects' ? 'bg-orcid-accent hover:bg-orcid-accent/90 text-white' : ''}
         >
           Projetos
         </Button>
         <Button
           variant={displayMode === 'both' ? 'default' : 'outline'}
           onClick={() => setDisplayMode('both')}
-          className={displayMode === 'both' ? 'bg-orcid-green hover:bg-orcid-green/90' : ''}
+          className={displayMode === 'both' ? 'bg-orcid-accent hover:bg-orcid-accent/90 text-white' : ''}
         >
           Ambos
         </Button>
@@ -113,30 +88,30 @@ const ResearcherProfile = () => {
         </div>
         
         <div className="md:col-span-1">
-          <Card className="p-4 mb-6">
-            <h3 className="section-title mb-4">Evolução de Publicações</h3>
+          <Card className="p-6 mb-6 shadow-md border border-orcid-gray/10">
+            <h3 className="section-title mb-4 text-orcid-accent">Evolução de Publicações</h3>
             <PublicationChart publications={researcher.publications} />
           </Card>
           
-          <Card className="p-4">
-            <h3 className="section-title mb-4">Links Acadêmicos</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+          <Card className="p-6 shadow-md border border-orcid-gray/10">
+            <h3 className="section-title mb-4 text-orcid-accent">Links Acadêmicos</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center text-orcid-secondary hover:text-orcid-accent transition-colors">
                 <Link className="w-4 h-4 mr-2" />
-                <a href={researcher.institutionalPage} target="_blank" rel="noopener noreferrer">
+                <a href={researcher.institutionalPage} target="_blank" rel="noopener noreferrer" className="hover:underline">
                   Página Institucional
                 </a>
               </li>
-              <li className="flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+              <li className="flex items-center text-orcid-secondary hover:text-orcid-accent transition-colors">
                 <Link className="w-4 h-4 mr-2" />
-                <a href={`https://orcid.org/${researcher.orcidId}`} target="_blank" rel="noopener noreferrer">
+                <a href={`https://orcid.org/${researcher.orcidId}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
                   Perfil ORCID
                 </a>
               </li>
               {researcher.externalLinks.map((link, index) => (
-                <li key={index} className="flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+                <li key={index} className="flex items-center text-orcid-secondary hover:text-orcid-accent transition-colors">
                   <Link className="w-4 h-4 mr-2" />
-                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  <a href={link.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                     {link.name}
                   </a>
                 </li>

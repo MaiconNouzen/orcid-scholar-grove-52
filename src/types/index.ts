@@ -35,3 +35,28 @@ export interface Project {
   role: string;
   publications: string[]; // IDs of associated publications
 }
+
+export interface Researcher {
+  name: string;
+  orcidId: string;
+  institution: string;
+  department: string;
+  role: string;
+  email: string;
+  bio: string;
+  education: string[];
+  researchInterests: string[];
+  socialLinks: {
+    twitter?: string;
+    linkedin?: string;
+    googleScholar?: string;
+    github?: string;
+  };
+  institutionalPage: string;
+  externalLinks: {
+    name: string;
+    url: string;
+  }[];
+  publications: Publication[];
+  projects: Project[];
+}

@@ -65,9 +65,12 @@ export default {
 				},
 				orcid: {
 					green: '#A6CE39',
-					dark: '#403E43',
-					gray: '#8A898C',
-					light: '#F1F0FB'
+					dark: '#2E3B4E',
+					gray: '#6B7C93',
+					light: '#F7FAFC',
+					accent: '#4C51BF',
+					secondary: '#667EEA',
+					tertiary: '#9F7AEA'
 				}
 			},
 			fontFamily: {

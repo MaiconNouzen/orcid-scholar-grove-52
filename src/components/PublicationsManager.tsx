@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -13,7 +12,7 @@ import { Publication, Author, Link as LinkType, Project } from '../types';
 
 const PublicationsManager = () => {
   const { toast } = useToast();
-  const [publications, setPublications] = useState<Publication[]>(mockResearcherData.publications);
+  const [publications, setPublications] = useState<Publication[]>(mockResearcherData.publications as Publication[]);
   const [newPublication, setNewPublication] = useState<Omit<Publication, 'id'>>({
     title: '',
     authors: [{ name: mockResearcherData.name, orcidId: mockResearcherData.orcidId }],
@@ -25,7 +24,7 @@ const PublicationsManager = () => {
     abstract: '',
     links: []
   });
-  const [projects] = useState<Project[]>(mockResearcherData.projects);
+  const [projects] = useState<Project[]>(mockResearcherData.projects as Project[]);
   const [newLink, setNewLink] = useState<LinkType>({ name: '', url: '' });
   const [newAuthor, setNewAuthor] = useState<Author>({ name: '', orcidId: '' });
 
@@ -160,8 +159,8 @@ const PublicationsManager = () => {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <Card className="p-6 mb-6">
-        <h2 className="text-2xl font-serif font-semibold text-orcid-dark mb-4">Nova Publicação</h2>
+      <Card className="p-6 mb-6 shadow-md border border-orcid-gray/10">
+        <h2 className="text-2xl font-serif font-semibold text-orcid-accent mb-4">Nova Publicação</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
@@ -171,6 +170,7 @@ const PublicationsManager = () => {
               value={newPublication.title}
               onChange={handleChange}
               placeholder="Título da publicação"
+              className="border-orcid-gray/20"
             />
           </div>
           <div>
@@ -181,6 +181,7 @@ const PublicationsManager = () => {
               value={newPublication.year}
               onChange={handleChange}
               placeholder="Ano de publicação"
+              className="border-orcid-gray/20"
             />
           </div>
         </div>
@@ -192,7 +193,7 @@ const PublicationsManager = () => {
               value={newPublication.type} 
               onValueChange={(value) => handleSelectChange('type', value)}
             >
-              <SelectTrigger>
+              <SelectTrigger className="border-orcid-gray/20">
                 <SelectValue placeholder="Selecione o tipo" />
               </SelectTrigger>
               <SelectContent>
@@ -209,6 +210,7 @@ const PublicationsManager = () => {
               value={newPublication.source}
               onChange={handleChange}
               placeholder="Nome da revista/conferência/livro"
+              className="border-orcid-gray/20"
             />
           </div>
         </div>
@@ -223,7 +225,7 @@ const PublicationsManager = () => {
                 identifier: {...newPublication.identifier, type: value}
               })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="border-orcid-gray/20">
                 <SelectValue placeholder="Selecione o tipo" />
               </SelectTrigger>
               <SelectContent>
@@ -240,6 +242,7 @@ const PublicationsManager = () => {
               value={newPublication.identifier.value}
               onChange={handleIdentifierChange}
               placeholder="Valor do identificador"
+              className="border-orcid-gray/20"
             />
           </div>
         </div>
@@ -250,7 +253,7 @@ const PublicationsManager = () => {
             value={newPublication.project} 
             onValueChange={(value) => handleSelectChange('project', value)}
           >
-            <SelectTrigger>
+            <SelectTrigger className="border-orcid-gray/20">
               <SelectValue placeholder="Selecione um projeto (opcional)" />
             </SelectTrigger>
             <SelectContent>
@@ -272,6 +275,7 @@ const PublicationsManager = () => {
             onChange={handleChange}
             placeholder="Resumo da publicação"
             rows={3}
+            className="border-orcid-gray/20"
           />
         </div>
         
@@ -285,11 +289,13 @@ const PublicationsManager = () => {
                   value={author.name}
                   readOnly={index === 0} // First author is the current researcher
                   placeholder="Nome do autor"
+                  className="border-orcid-gray/20"
                 />
                 <Input 
                   value={author.orcidId}
                   readOnly={index === 0} // First author is the current researcher
                   placeholder="ORCID ID (opcional)"
+                  className="border-orcid-gray/20"
                 />
               </div>
               {index > 0 && (
@@ -310,12 +316,14 @@ const PublicationsManager = () => {
               value={newAuthor.name}
               onChange={handleAuthorChange}
               placeholder="Nome do autor"
+              className="border-orcid-gray/20"
             />
             <Input 
               name="orcidId"
               value={newAuthor.orcidId}
               onChange={handleAuthorChange}
               placeholder="ORCID ID (opcional)"
+              className="border-orcid-gray/20"
             />
           </div>
           
@@ -340,11 +348,13 @@ const PublicationsManager = () => {
                   value={link.name}
                   disabled
                   placeholder="Nome do link"
+                  className="border-orcid-gray/20"
                 />
                 <Input 
                   value={link.url}
                   disabled
                   placeholder="URL"
+                  className="border-orcid-gray/20"
                 />
               </div>
               <Button 
@@ -363,12 +373,14 @@ const PublicationsManager = () => {
               value={newLink.name}
               onChange={handleLinkChange}
               placeholder="Nome do link"
+              className="border-orcid-gray/20"
             />
             <Input 
               name="url"
               value={newLink.url}
               onChange={handleLinkChange}
               placeholder="URL"
+              className="border-orcid-gray/20"
             />
           </div>
           
@@ -384,49 +396,51 @@ const PublicationsManager = () => {
         </div>
         
         <div className="flex justify-end">
-          <Button onClick={savePublication} className="bg-orcid-green hover:bg-orcid-green/90">
+          <Button onClick={savePublication} className="bg-orcid-accent hover:bg-orcid-accent/90">
             <Save className="h-4 w-4 mr-2" />
             Salvar Publicação
           </Button>
         </div>
       </Card>
       
-      <Card className="p-6">
-        <h2 className="text-2xl font-serif font-semibold text-orcid-dark mb-4">Publicações Cadastradas</h2>
+      <Card className="p-6 shadow-md border border-orcid-gray/10">
+        <h2 className="text-2xl font-serif font-semibold text-orcid-accent mb-4">Publicações Cadastradas</h2>
         
         {publications.length > 0 ? (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Título</TableHead>
-                <TableHead>Tipo</TableHead>
-                <TableHead>Ano</TableHead>
-                <TableHead>Fonte</TableHead>
-                <TableHead>Ações</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {publications.map((pub) => (
-                <TableRow key={pub.id}>
-                  <TableCell className="font-medium">{pub.title}</TableCell>
-                  <TableCell>{pub.type}</TableCell>
-                  <TableCell>{pub.year}</TableCell>
-                  <TableCell>{pub.source}</TableCell>
-                  <TableCell>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      onClick={() => deletePublication(pub.id)}
-                    >
-                      <Trash className="h-4 w-4 text-red-500" />
-                    </Button>
-                  </TableCell>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-orcid-dark">Título</TableHead>
+                  <TableHead className="text-orcid-dark">Tipo</TableHead>
+                  <TableHead className="text-orcid-dark">Ano</TableHead>
+                  <TableHead className="text-orcid-dark">Fonte</TableHead>
+                  <TableHead className="text-orcid-dark">Ações</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {publications.map((pub) => (
+                  <TableRow key={pub.id} className="hover:bg-orcid-light">
+                    <TableCell className="font-medium">{pub.title}</TableCell>
+                    <TableCell>{pub.type}</TableCell>
+                    <TableCell>{pub.year}</TableCell>
+                    <TableCell>{pub.source}</TableCell>
+                    <TableCell>
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        onClick={() => deletePublication(pub.id)}
+                      >
+                        <Trash className="h-4 w-4 text-red-500" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         ) : (
-          <p className="text-gray-500 text-center py-4">Nenhuma publicação cadastrada</p>
+          <p className="text-orcid-gray text-center py-4">Nenhuma publicação cadastrada</p>
         )}
       </Card>
     </div>
