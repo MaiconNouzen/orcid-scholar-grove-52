@@ -8,11 +8,12 @@ import { Plus, Save, Trash } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 import { mockResearcherData } from '../data/mockData';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Project } from '../types';
 
 const ProjectsManager = () => {
   const { toast } = useToast();
-  const [projects, setProjects] = useState(mockResearcherData.projects);
-  const [newProject, setNewProject] = useState({
+  const [projects, setProjects] = useState<Project[]>(mockResearcherData.projects);
+  const [newProject, setNewProject] = useState<Omit<Project, 'id' | 'publications'>>({
     title: '',
     description: '',
     startYear: new Date().getFullYear(),
@@ -21,7 +22,7 @@ const ProjectsManager = () => {
     role: 'Pesquisador'
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setNewProject({
       ...newProject,
@@ -40,7 +41,7 @@ const ProjectsManager = () => {
     }
     
     // Generate a random ID for the new project
-    const newProj = {
+    const newProj: Project = {
       ...newProject,
       id: Date.now().toString(),
       publications: [] // Initially, no publications are associated with this project
@@ -64,7 +65,7 @@ const ProjectsManager = () => {
     });
   };
 
-  const deleteProject = (id) => {
+  const deleteProject = (id: string) => {
     const updatedProjects = projects.filter(proj => proj.id !== id);
     setProjects(updatedProjects);
     

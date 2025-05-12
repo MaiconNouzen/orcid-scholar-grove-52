@@ -8,9 +8,35 @@ import ProjectSection from './ProjectSection';
 import PublicationChart from './PublicationChart';
 import { mockResearcherData } from '../data/mockData';
 import { Button } from '@/components/ui/button';
+import { Project, Publication } from '../types';
+
+interface Researcher {
+  name: string;
+  orcidId: string;
+  institution: string;
+  department: string;
+  role: string;
+  email: string;
+  bio: string;
+  education: string[];
+  researchInterests: string[];
+  socialLinks: {
+    twitter?: string;
+    linkedin?: string;
+    googleScholar?: string;
+    github?: string;
+  };
+  institutionalPage: string;
+  externalLinks: {
+    name: string;
+    url: string;
+  }[];
+  publications: Publication[];
+  projects: Project[];
+}
 
 const ResearcherProfile = () => {
-  const [researcher, setResearcher] = useState(mockResearcherData);
+  const [researcher, setResearcher] = useState<Researcher>(mockResearcherData);
   const [loading, setLoading] = useState(false);
   const [displayMode, setDisplayMode] = useState<'publications' | 'projects' | 'both'>('both');
 

@@ -1,17 +1,22 @@
 
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { ChevronDown, ChevronUp, Link } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import PublicationItem from './PublicationItem';
+import { Publication } from '../types';
 
-const PublicationSection = ({ publications }) => {
+interface PublicationSectionProps {
+  publications: Publication[];
+}
+
+const PublicationSection = ({ publications }: PublicationSectionProps) => {
   const [expandedTypes, setExpandedTypes] = useState({
     'Journal Article': true,
     'Conference Paper': true,
     'Book Chapter': true,
   });
 
-  const toggleExpand = (type) => {
+  const toggleExpand = (type: string) => {
     setExpandedTypes(prev => ({
       ...prev,
       [type]: !prev[type]
@@ -25,7 +30,7 @@ const PublicationSection = ({ publications }) => {
     }
     acc[pub.type].push(pub);
     return acc;
-  }, {});
+  }, {} as Record<string, Publication[]>);
 
   // Count publications by type
   const publicationCounts = Object.keys(groupedPublications).map(type => ({

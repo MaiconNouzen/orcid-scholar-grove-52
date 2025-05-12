@@ -9,11 +9,12 @@ import { useToast } from "@/components/ui/use-toast";
 import { mockResearcherData } from '../data/mockData';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Publication, Author, Link as LinkType, Project } from '../types';
 
 const PublicationsManager = () => {
   const { toast } = useToast();
-  const [publications, setPublications] = useState(mockResearcherData.publications);
-  const [newPublication, setNewPublication] = useState({
+  const [publications, setPublications] = useState<Publication[]>(mockResearcherData.publications);
+  const [newPublication, setNewPublication] = useState<Omit<Publication, 'id'>>({
     title: '',
     authors: [{ name: mockResearcherData.name, orcidId: mockResearcherData.orcidId }],
     year: new Date().getFullYear(),
@@ -24,11 +25,11 @@ const PublicationsManager = () => {
     abstract: '',
     links: []
   });
-  const [projects] = useState(mockResearcherData.projects);
-  const [newLink, setNewLink] = useState({ name: '', url: '' });
-  const [newAuthor, setNewAuthor] = useState({ name: '', orcidId: '' });
+  const [projects] = useState<Project[]>(mockResearcherData.projects);
+  const [newLink, setNewLink] = useState<LinkType>({ name: '', url: '' });
+  const [newAuthor, setNewAuthor] = useState<Author>({ name: '', orcidId: '' });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setNewPublication({
       ...newPublication,
@@ -36,14 +37,14 @@ const PublicationsManager = () => {
     });
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (name: string, value: string) => {
     setNewPublication({
       ...newPublication,
       [name]: value
     });
   };
 
-  const handleIdentifierChange = (e) => {
+  const handleIdentifierChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewPublication({
       ...newPublication,
@@ -54,7 +55,7 @@ const PublicationsManager = () => {
     });
   };
 
-  const handleLinkChange = (e) => {
+  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewLink({
       ...newLink,
@@ -62,7 +63,7 @@ const PublicationsManager = () => {
     });
   };
 
-  const handleAuthorChange = (e) => {
+  const handleAuthorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewAuthor({
       ...newAuthor,
@@ -80,7 +81,7 @@ const PublicationsManager = () => {
     }
   };
 
-  const removeLink = (index) => {
+  const removeLink = (index: number) => {
     const newLinks = [...newPublication.links];
     newLinks.splice(index, 1);
     setNewPublication({
@@ -99,7 +100,7 @@ const PublicationsManager = () => {
     }
   };
 
-  const removeAuthor = (index) => {
+  const removeAuthor = (index: number) => {
     if (index === 0) return; // Don't remove the first author (self)
     
     const newAuthors = [...newPublication.authors];
@@ -121,7 +122,7 @@ const PublicationsManager = () => {
     }
     
     // Generate a random ID for the new publication
-    const newPub = {
+    const newPub: Publication = {
       ...newPublication,
       id: Date.now().toString()
     };
@@ -147,7 +148,7 @@ const PublicationsManager = () => {
     });
   };
 
-  const deletePublication = (id) => {
+  const deletePublication = (id: string) => {
     const updatedPublications = publications.filter(pub => pub.id !== id);
     setPublications(updatedPublications);
     
@@ -406,7 +407,7 @@ const PublicationsManager = () => {
             </TableHeader>
             <TableBody>
               {publications.map((pub) => (
-                <TableRow key={pub.id || pub.title}>
+                <TableRow key={pub.id}>
                   <TableCell className="font-medium">{pub.title}</TableCell>
                   <TableCell>{pub.type}</TableCell>
                   <TableCell>{pub.year}</TableCell>
@@ -415,7 +416,7 @@ const PublicationsManager = () => {
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      onClick={() => deletePublication(pub.id || pub.title)}
+                      onClick={() => deletePublication(pub.id)}
                     >
                       <Trash className="h-4 w-4 text-red-500" />
                     </Button>
