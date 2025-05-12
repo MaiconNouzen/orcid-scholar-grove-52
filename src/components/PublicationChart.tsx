@@ -2,7 +2,19 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-const PublicationChart = ({ publications }) => {
+// Define the Publication type structure
+interface Publication {
+  title: string;
+  year: number | string;
+  type: string;
+  // Add other fields that might be needed, but year is essential for the chart
+}
+
+interface PublicationChartProps {
+  publications: Publication[];
+}
+
+const PublicationChart = ({ publications }: PublicationChartProps) => {
   // Count publications by year
   const publicationsByYear = publications.reduce((acc, pub) => {
     const year = pub.year.toString();
@@ -11,7 +23,7 @@ const PublicationChart = ({ publications }) => {
     }
     acc[year].count += 1;
     return acc;
-  }, {});
+  }, {} as Record<string, { year: string, count: number }>);
 
   // Convert to array and sort by year
   const data = Object.values(publicationsByYear).sort((a, b) => 
