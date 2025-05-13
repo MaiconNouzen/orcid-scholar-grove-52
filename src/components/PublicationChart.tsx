@@ -12,11 +12,17 @@ interface Publication {
 
 interface PublicationChartProps {
   publications: Publication[];
+  projectFilter?: string;
 }
 
-const PublicationChart = ({ publications }: PublicationChartProps) => {
+const PublicationChart = ({ publications, projectFilter }: PublicationChartProps) => {
+  // Filter publications if a project is specified
+  const filteredPublications = projectFilter 
+    ? publications.filter(pub => pub.project === projectFilter)
+    : publications;
+
   // Count publications by year
-  const publicationsByYear = publications.reduce((acc, pub) => {
+  const publicationsByYear = filteredPublications.reduce((acc, pub) => {
     const year = pub.year.toString();
     if (!acc[year]) {
       acc[year] = { year, count: 0 };
@@ -43,7 +49,7 @@ const PublicationChart = ({ publications }: PublicationChartProps) => {
             formatter={(value) => [`${value} publicações`]} 
             labelFormatter={(value) => `Ano: ${value}`}
           />
-          <Bar dataKey="count" fill="#A6CE39" name="Publicações" />
+          <Bar dataKey="count" fill="#1E40AF" name="Publicações" />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -1,17 +1,24 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Link } from 'lucide-react';
 import ProfileHeader from './ProfileHeader';
 import PublicationSection from './PublicationSection';
 import ProjectSection from './ProjectSection';
 import PublicationChart from './PublicationChart';
-import { mockResearcherData } from '../data/mockData';
+import ProjectPublicationChart from './ProjectPublicationChart';
+import { mockResearcherData, mockResearchers } from '../data/mockData';
 import { Researcher } from '../types';
 
-const ResearcherProfile = () => {
-  const [researcher, setResearcher] = useState<Researcher>(mockResearcherData as Researcher);
+interface ResearcherProfileProps {
+  researcherId?: string;
+}
+
+const ResearcherProfile = ({ researcherId }: ResearcherProfileProps) => {
+  const [researcher, setResearcher] = useState<Researcher | null>(null);
   const [loading, setLoading] = useState(false);
+  const [activeChartTab, setActiveChartTab] = useState("publications");
 
   // This is where we would fetch data from ORCID API in a real implementation
   useEffect(() => {
@@ -25,15 +32,20 @@ const ResearcherProfile = () => {
       
       // For now, we use our mock data
       setTimeout(() => {
-        setResearcher(mockResearcherData as Researcher);
+        if (researcherId && researcherId !== 'current') {
+          const found = mockResearchers.find(r => r.orcidId === researcherId);
+          setResearcher(found || mockResearcherData as Researcher);
+        } else {
+          setResearcher(mockResearcherData as Researcher);
+        }
         setLoading(false);
-      }, 800);
+      }, 500);
     };
 
     fetchOrcidData();
-  }, []);
+  }, [researcherId]);
 
-  if (loading) {
+  if (loading || !researcher) {
     return (
       <div className="container mx-auto px-4 py-8 flex justify-center items-center h-screen">
         <div className="text-center">
@@ -56,7 +68,21 @@ const ResearcherProfile = () => {
         <div className="md:col-span-1">
           <Card className="p-4 mb-6">
             <h3 className="section-title mb-4">Evolução de Publicações</h3>
-            <PublicationChart publications={researcher.publications} />
+            
+            <Tabs value={activeChartTab} onValueChange={setActiveChartTab}>
+              <TabsList className="mb-4 w-full">
+                <TabsTrigger value="publications" className="flex-1">Por Ano</TabsTrigger>
+                <TabsTrigger value="projects" className="flex-1">Por Projeto</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="publications">
+                <PublicationChart publications={researcher.publications} />
+              </TabsContent>
+              
+              <TabsContent value="projects">
+                <ProjectPublicationChart publications={researcher.publications} projects={researcher.projects} />
+              </TabsContent>
+            </Tabs>
           </Card>
           
           <Card className="p-4">

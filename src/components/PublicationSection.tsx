@@ -1,10 +1,13 @@
 
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { ChevronDown, ChevronUp, Link } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ChevronDown, ChevronUp, Link, Edit } from 'lucide-react';
 import PublicationItem from './PublicationItem';
+import { useNavigate } from 'react-router-dom';
 
 const PublicationSection = ({ publications }) => {
+  const navigate = useNavigate();
   const [expandedTypes, setExpandedTypes] = useState({
     'Journal Article': true,
     'Conference Paper': true,
@@ -33,9 +36,22 @@ const PublicationSection = ({ publications }) => {
     count: groupedPublications[type].length
   }));
 
+  const handleEdit = (index) => {
+    navigate(`/edit-publication/${index}`);
+  };
+
   return (
     <Card className="p-4 mb-6">
-      <h2 className="section-title mb-4">Publicações Acadêmicas</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="section-title">Publicações Acadêmicas</h2>
+        <Button 
+          variant="outline" 
+          onClick={() => navigate('/publications')}
+          className="text-sm"
+        >
+          Ver todas
+        </Button>
+      </div>
       
       {publicationCounts.length === 0 ? (
         <p className="text-gray-500">Nenhuma publicação encontrada.</p>
@@ -62,7 +78,20 @@ const PublicationSection = ({ publications }) => {
                 {expandedTypes[type] && (
                   <div className="mt-2 space-y-4">
                     {typePubs.map((pub, index) => (
-                      <PublicationItem key={index} publication={pub} />
+                      <div key={index} className="relative">
+                        <PublicationItem publication={pub} />
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="absolute top-3 right-12 text-gray-500 hover:text-blue-600"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEdit(publications.indexOf(pub));
+                          }}
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                      </div>
                     ))}
                   </div>
                 )}

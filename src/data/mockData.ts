@@ -1,4 +1,8 @@
 
+import mockResearchers from './mockResearchers';
+
+export { mockResearchers };
+
 export const mockResearcherData = {
   name: "Maria Oliveira Silva",
   orcidId: "0000-0002-1234-5678",

@@ -1,9 +1,12 @@
 
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ChevronDown, ChevronUp, Edit } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectSection = ({ projects, publications }) => {
+  const navigate = useNavigate();
   const [expandedProjects, setExpandedProjects] = useState({});
 
   const toggleExpand = (projectId) => {
@@ -18,9 +21,23 @@ const ProjectSection = ({ projects, publications }) => {
     return publications.filter(pub => pub.project === projectName);
   };
 
+  const handleEditProject = (projectId, e) => {
+    e.stopPropagation();
+    navigate(`/edit-project/${projectId}`);
+  };
+
   return (
     <Card className="p-4">
-      <h2 className="section-title mb-4">Projetos de Pesquisa</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="section-title">Projetos de Pesquisa</h2>
+        <Button 
+          variant="outline" 
+          onClick={() => navigate('/projects')}
+          className="text-sm"
+        >
+          Ver todos
+        </Button>
+      </div>
       
       {projects.length === 0 ? (
         <p className="text-gray-500">Nenhum projeto encontrado.</p>
@@ -32,7 +49,7 @@ const ProjectSection = ({ projects, publications }) => {
             return (
               <div key={project.id} className="border border-gray-200 rounded-md bg-white">
                 <div 
-                  className="accordion-header"
+                  className="accordion-header relative"
                   onClick={() => toggleExpand(project.id)}
                 >
                   <h3 className="font-medium">{project.name}</h3>
@@ -40,6 +57,14 @@ const ProjectSection = ({ projects, publications }) => {
                     <span className="text-sm text-gray-500 mr-2">
                       {projectPubs.length} publicações
                     </span>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="mr-2 text-gray-500 hover:text-blue-600"
+                      onClick={(e) => handleEditProject(project.id, e)}
+                    >
+                      <Edit className="w-4 h-4" />
+                    </Button>
                     {expandedProjects[project.id] ? (
                       <ChevronUp className="w-5 h-5" />
                     ) : (

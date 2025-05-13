@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
-import { Link, Plus, Minus } from 'lucide-react';
+import { Link as LinkIcon, Plus, Minus } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const PublicationItem = ({ publication }) => {
+const PublicationItem = ({ publication, editable = false }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -20,14 +21,12 @@ const PublicationItem = ({ publication }) => {
       <p className="text-sm text-gray-600 mt-1">
         {publication.authors.map((author, i) => (
           <span key={i}>
-            <a 
-              href={`https://orcid.org/${author.orcidId}`} 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <Link 
+              to={`/researcher/${author.orcidId}`} 
               className="hover:underline text-blue-600"
             >
               {author.name}
-            </a>
+            </Link>
             {i < publication.authors.length - 1 ? ', ' : ''}
           </span>
         ))}
@@ -56,7 +55,7 @@ const PublicationItem = ({ publication }) => {
             <h5 className="text-sm font-medium">Links:</h5>
             {publication.links.map((link, index) => (
               <div key={index} className="flex items-center text-sm text-blue-600">
-                <Link className="w-3 h-3 mr-1" />
+                <LinkIcon className="w-3 h-3 mr-1" />
                 <a href={link.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                   {link.name}
                 </a>
