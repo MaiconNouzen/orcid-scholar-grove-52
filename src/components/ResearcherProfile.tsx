@@ -7,9 +7,10 @@ import PublicationSection from './PublicationSection';
 import ProjectSection from './ProjectSection';
 import PublicationChart from './PublicationChart';
 import { mockResearcherData } from '../data/mockData';
+import { Researcher } from '../types';
 
 const ResearcherProfile = () => {
-  const [researcher, setResearcher] = useState(mockResearcherData);
+  const [researcher, setResearcher] = useState<Researcher>(mockResearcherData as Researcher);
   const [loading, setLoading] = useState(false);
 
   // This is where we would fetch data from ORCID API in a real implementation
@@ -24,7 +25,7 @@ const ResearcherProfile = () => {
       
       // For now, we use our mock data
       setTimeout(() => {
-        setResearcher(mockResearcherData);
+        setResearcher(mockResearcherData as Researcher);
         setLoading(false);
       }, 800);
     };
