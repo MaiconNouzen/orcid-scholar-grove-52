@@ -4,8 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { 
   Home,
   User, 
-  FileText, 
-  Briefcase, 
   Search as SearchIcon, 
   Settings, 
   LogIn
@@ -16,9 +14,7 @@ const Navigation = () => {
   
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
-    { path: '/profile', label: 'Perfil', icon: User },
-    { path: '/publications', label: 'Publicações', icon: FileText },
-    { path: '/projects', label: 'Projetos', icon: Briefcase },
+    { path: '/profile', label: 'Meu Perfil', icon: User },
     { path: '/search', label: 'Buscar', icon: SearchIcon },
     { path: '/edit-profile', label: 'Editar Perfil', icon: Settings },
   ];
@@ -74,8 +70,8 @@ const Navigation = () => {
       
       {/* Mobile navigation */}
       <div className="md:hidden border-t border-gray-200">
-        <div className="grid grid-cols-5">
-          {navItems.slice(0, 5).map((item) => {
+        <div className="grid grid-cols-4">
+          {navItems.map((item) => {
             const IconComponent = item.icon;
             const isActive = location.pathname === item.path;
             
