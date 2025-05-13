@@ -1,22 +1,17 @@
 
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Link } from 'lucide-react';
 import PublicationItem from './PublicationItem';
-import { Publication } from '../types';
 
-interface PublicationSectionProps {
-  publications: Publication[];
-}
-
-const PublicationSection = ({ publications }: PublicationSectionProps) => {
+const PublicationSection = ({ publications }) => {
   const [expandedTypes, setExpandedTypes] = useState({
     'Journal Article': true,
     'Conference Paper': true,
     'Book Chapter': true,
   });
 
-  const toggleExpand = (type: string) => {
+  const toggleExpand = (type) => {
     setExpandedTypes(prev => ({
       ...prev,
       [type]: !prev[type]
@@ -30,7 +25,7 @@ const PublicationSection = ({ publications }: PublicationSectionProps) => {
     }
     acc[pub.type].push(pub);
     return acc;
-  }, {} as Record<string, Publication[]>);
+  }, {});
 
   // Count publications by type
   const publicationCounts = Object.keys(groupedPublications).map(type => ({
@@ -39,11 +34,11 @@ const PublicationSection = ({ publications }: PublicationSectionProps) => {
   }));
 
   return (
-    <Card className="p-6 mb-6 shadow-md border border-orcid-gray/10">
-      <h2 className="section-title mb-6 text-orcid-accent">Publicações Acadêmicas</h2>
+    <Card className="p-4 mb-6">
+      <h2 className="section-title mb-4">Publicações Acadêmicas</h2>
       
       {publicationCounts.length === 0 ? (
-        <p className="text-orcid-gray">Nenhuma publicação encontrada.</p>
+        <p className="text-gray-500">Nenhuma publicação encontrada.</p>
       ) : (
         <>
           {['Journal Article', 'Conference Paper', 'Book Chapter'].map((type) => {
@@ -53,19 +48,19 @@ const PublicationSection = ({ publications }: PublicationSectionProps) => {
             return (
               <div key={type} className="mb-6">
                 <div 
-                  className="accordion-header hover:bg-orcid-secondary/10"
+                  className="accordion-header"
                   onClick={() => toggleExpand(type)}
                 >
-                  <h3 className="font-medium text-orcid-dark">{type} ({typePubs.length})</h3>
+                  <h3 className="font-medium">{type} ({typePubs.length})</h3>
                   {expandedTypes[type] ? (
-                    <ChevronUp className="w-5 h-5 text-orcid-accent" />
+                    <ChevronUp className="w-5 h-5" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-orcid-accent" />
+                    <ChevronDown className="w-5 h-5" />
                   )}
                 </div>
                 
                 {expandedTypes[type] && (
-                  <div className="mt-4 space-y-4">
+                  <div className="mt-2 space-y-4">
                     {typePubs.map((pub, index) => (
                       <PublicationItem key={index} publication={pub} />
                     ))}

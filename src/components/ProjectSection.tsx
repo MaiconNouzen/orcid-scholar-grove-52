@@ -2,17 +2,11 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { Project, Publication } from '../types';
 
-interface ProjectSectionProps {
-  projects: Project[];
-  publications: Publication[];
-}
+const ProjectSection = ({ projects, publications }) => {
+  const [expandedProjects, setExpandedProjects] = useState({});
 
-const ProjectSection = ({ projects, publications }: ProjectSectionProps) => {
-  const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
-
-  const toggleExpand = (projectId: string) => {
+  const toggleExpand = (projectId) => {
     setExpandedProjects(prev => ({
       ...prev,
       [projectId]: !prev[projectId]
@@ -20,7 +14,7 @@ const ProjectSection = ({ projects, publications }: ProjectSectionProps) => {
   };
 
   // Count publications by project
-  const getProjectPublications = (projectName: string) => {
+  const getProjectPublications = (projectName) => {
     return publications.filter(pub => pub.project === projectName);
   };
 
@@ -33,7 +27,7 @@ const ProjectSection = ({ projects, publications }: ProjectSectionProps) => {
       ) : (
         <div className="space-y-4">
           {projects.map((project) => {
-            const projectPubs = getProjectPublications(project.title);
+            const projectPubs = getProjectPublications(project.name);
             
             return (
               <div key={project.id} className="border border-gray-200 rounded-md bg-white">
@@ -41,7 +35,7 @@ const ProjectSection = ({ projects, publications }: ProjectSectionProps) => {
                   className="accordion-header"
                   onClick={() => toggleExpand(project.id)}
                 >
-                  <h3 className="font-medium">{project.title}</h3>
+                  <h3 className="font-medium">{project.name}</h3>
                   <div className="flex items-center">
                     <span className="text-sm text-gray-500 mr-2">
                       {projectPubs.length} publicações
@@ -61,9 +55,9 @@ const ProjectSection = ({ projects, publications }: ProjectSectionProps) => {
                     <div>
                       <h4 className="text-sm font-medium mb-2">Período: {project.startYear} - {project.endYear || "Atual"}</h4>
                       
-                      {project.fundingAgency && (
+                      {project.funding && (
                         <p className="text-sm text-gray-700 mb-3">
-                          <span className="font-medium">Financiamento:</span> {project.fundingAgency}
+                          <span className="font-medium">Financiamento:</span> {project.funding}
                         </p>
                       )}
                       
