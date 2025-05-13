@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
+  Home,
   User, 
   FileText, 
   Briefcase, 
@@ -14,7 +15,8 @@ const Navigation = () => {
   const location = useLocation();
   
   const navItems = [
-    { path: '/', label: 'Perfil', icon: User },
+    { path: '/', label: 'Home', icon: Home },
+    { path: '/profile', label: 'Perfil', icon: User },
     { path: '/publications', label: 'Publicações', icon: FileText },
     { path: '/projects', label: 'Projetos', icon: Briefcase },
     { path: '/search', label: 'Buscar', icon: SearchIcon },
@@ -73,7 +75,7 @@ const Navigation = () => {
       {/* Mobile navigation */}
       <div className="md:hidden border-t border-gray-200">
         <div className="grid grid-cols-5">
-          {navItems.map((item) => {
+          {navItems.slice(0, 5).map((item) => {
             const IconComponent = item.icon;
             const isActive = location.pathname === item.path;
             
