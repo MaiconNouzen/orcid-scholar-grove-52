@@ -1,14 +1,7 @@
 
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-
-// Define the Publication type structure
-interface Publication {
-  title: string;
-  year: number | string;
-  type: string;
-  // Add other fields that might be needed, but year is essential for the chart
-}
+import { Publication } from '../types';
 
 interface PublicationChartProps {
   publications: Publication[];
