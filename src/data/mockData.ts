@@ -1,6 +1,31 @@
-import mockResearchers from './mockResearchers';
+import researchersList from './mockResearchers';
 
-export { mockResearchers };
+export const mockResearchers = [
+  ...researchersList,
+  joaoResearcher,
+  {
+    name: "Maria Santos",
+    orcidId: "0000-0001-9876-5432",
+    institution: "Universidade de São Paulo",
+    bio: "Pesquisadora na área de inteligência artificial com foco em aprendizado de máquina.",
+    researchAreas: ["Machine Learning", "Data Science"],
+    institutionalPage: "https://www.usp.br/",
+    externalLinks: [],
+    publications: [],
+    projects: []
+  },
+  {
+    name: "Pedro Almeida",
+    orcidId: "0000-0003-4567-8901",
+    institution: "Universidade Estadual de Campinas",
+    bio: "Especialista em processamento de linguagem natural e recuperação de informação.",
+    researchAreas: ["NLP", "Information Retrieval"],
+    institutionalPage: "https://www.unicamp.br/",
+    externalLinks: [],
+    publications: [],
+    projects: []
+  }
+];
 
 export const mockResearcherData = {
   name: "Maria Oliveira Silva",
@@ -251,30 +276,3 @@ export const joaoResearcher = {
     }
   ]
 };
-
-// Add João to the mockResearchers array
-export const mockResearchers = [
-  joaoResearcher,
-  {
-    name: "Maria Santos",
-    orcidId: "0000-0001-9876-5432",
-    institution: "Universidade de São Paulo",
-    bio: "Pesquisadora na área de inteligência artificial com foco em aprendizado de máquina.",
-    researchAreas: ["Machine Learning", "Data Science"],
-    institutionalPage: "https://www.usp.br/",
-    externalLinks: [],
-    publications: [],
-    projects: []
-  },
-  {
-    name: "Pedro Almeida",
-    orcidId: "0000-0003-4567-8901",
-    institution: "Universidade Estadual de Campinas",
-    bio: "Especialista em processamento de linguagem natural e recuperação de informação.",
-    researchAreas: ["NLP", "Information Retrieval"],
-    institutionalPage: "https://www.unicamp.br/",
-    externalLinks: [],
-    publications: [],
-    projects: []
-  }
-];
