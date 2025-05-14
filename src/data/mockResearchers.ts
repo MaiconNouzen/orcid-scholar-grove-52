@@ -16,6 +16,7 @@ export const mockResearchers: Researcher[] = [
     ],
     publications: [
       {
+        id: "pub1",
         title: "Deep Learning para Análise de Imagens Médicas",
         authors: [
           { name: "Maria Silva", orcidId: "0000-0002-1234-5678" },
@@ -33,6 +34,7 @@ export const mockResearchers: Researcher[] = [
         project: "IA para Saúde"
       },
       {
+        id: "pub2",
         title: "Métodos de Feature Selection para Grandes Bases de Dados",
         authors: [
           { name: "Maria Silva", orcidId: "0000-0002-1234-5678" },
@@ -82,6 +84,7 @@ export const mockResearchers: Researcher[] = [
     ],
     publications: [
       {
+        id: "pub3",
         title: "Deep Learning para Análise de Imagens Médicas",
         authors: [
           { name: "Maria Silva", orcidId: "0000-0002-1234-5678" },
@@ -99,6 +102,7 @@ export const mockResearchers: Researcher[] = [
         project: "Modelos Estatísticos para Medicina"
       },
       {
+        id: "pub4",
         title: "Métodos Bayesianos para Previsão de Séries Temporais",
         authors: [
           { name: "João Santos", orcidId: "0000-0001-5678-1234" }
@@ -140,6 +144,7 @@ export const mockResearchers: Researcher[] = [
     ],
     publications: [
       {
+        id: "pub5",
         title: "Métodos de Feature Selection para Grandes Bases de Dados",
         authors: [
           { name: "Maria Silva", orcidId: "0000-0002-1234-5678" },
@@ -156,6 +161,7 @@ export const mockResearchers: Researcher[] = [
         project: "Sistemas Inteligentes"
       },
       {
+        id: "pub6",
         title: "Processamento de Sinais de EEG para Interfaces Cérebro-Computador",
         authors: [
           { name: "Carlos Oliveira", orcidId: "0000-0003-9876-5432" },

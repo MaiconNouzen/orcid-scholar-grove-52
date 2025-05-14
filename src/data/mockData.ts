@@ -7,7 +7,10 @@ export const mockResearcherData = {
   name: "Maria Oliveira Silva",
   orcidId: "0000-0002-1234-5678",
   institution: "Universidade de São Paulo (ICMC-USP)",
+  department: "Instituto de Ciências Matemáticas e de Computação",
+  role: "Professora Associada",
   bio: "Pesquisadora na área de Ciência da Computação com foco em Inteligência Artificial e Aprendizado de Máquina aplicados a problemas complexos.",
+  email: "mariasilva@usp.br",
   researchAreas: ["Inteligência Artificial", "Aprendizado de Máquina", "Processamento de Linguagem Natural", "Ciência de Dados"],
   institutionalPage: "https://example.com/researcher-page",
   externalLinks: [
@@ -17,6 +20,7 @@ export const mockResearcherData = {
   ],
   publications: [
     {
+      id: "p1",
       title: "Aplicações de Deep Learning para Detecção de Fraudes em Sistemas Financeiros",
       authors: [
         { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" },
@@ -34,6 +38,7 @@ export const mockResearcherData = {
       project: "IA para Segurança Financeira"
     },
     {
+      id: "p2",
       title: "Modelos Transformers para Análise de Sentimentos em Português",
       authors: [
         { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" },
@@ -51,6 +56,7 @@ export const mockResearcherData = {
       project: "NLP para Língua Portuguesa"
     },
     {
+      id: "p3",
       title: "Algoritmos de Otimização para Roteamento em Redes IoT",
       authors: [
         { name: "Carlos Ferreira", orcidId: "0000-0004-6789-0123" },
@@ -67,6 +73,7 @@ export const mockResearcherData = {
       project: "Redes IoT Sustentáveis"
     },
     {
+      id: "p4",
       title: "Técnicas de Mineração de Dados para Detecção de Padrões em Registros Médicos",
       authors: [
         { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" },
@@ -83,6 +90,7 @@ export const mockResearcherData = {
       project: "Mineração de Dados em Saúde"
     },
     {
+      id: "p5",
       title: "Abordagem Híbrida para Sistemas de Recomendação com Feedback Implícito",
       authors: [
         { name: "Ana Pereira", orcidId: "0000-0001-5678-9012" },
@@ -100,6 +108,7 @@ export const mockResearcherData = {
       project: "NLP para Língua Portuguesa"
     },
     {
+      id: "p6",
       title: "Privacidade em Sistemas de Aprendizado Federado: Desafios e Soluções",
       authors: [
         { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" }

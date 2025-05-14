@@ -4,30 +4,51 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { mockResearcherData, mockResearchers } from '../data/mockData';
+import { mockResearchers, mockResearcherData } from '../data/mockData';
 import { Researcher } from '../types';
 import ResearcherProfile from '../components/ResearcherProfile';
+import { toast } from '@/components/ui/use-toast';
 
 const ResearcherProfilePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [researcher, setResearcher] = useState<Researcher | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
 
   useEffect(() => {
     const fetchResearcher = async () => {
       setLoading(true);
       // In a real app, fetch from API using the ID
-      // Here we're using mock data
-      setTimeout(() => {
-        if (id === 'current') {
-          setResearcher(mockResearcherData as Researcher);
-        } else {
-          const found = mockResearchers.find(r => r.orcidId === id);
-          setResearcher(found || null);
-        }
+      try {
+        setTimeout(() => {
+          if (id === 'current') {
+            setResearcher(mockResearcherData as Researcher);
+            setIsCurrentUser(true);
+          } else {
+            const found = mockResearchers.find(r => r.orcidId === id);
+            if (found) {
+              setResearcher(found);
+              setIsCurrentUser(false);
+            } else {
+              setResearcher(null);
+              toast({
+                title: "Pesquisador não encontrado",
+                description: "Não foi possível encontrar um pesquisador com o ID fornecido.",
+                variant: "destructive"
+              });
+            }
+          }
+          setLoading(false);
+        }, 500);
+      } catch (error) {
+        toast({
+          title: "Erro ao carregar perfil",
+          description: "Ocorreu um erro ao carregar os dados do pesquisador.",
+          variant: "destructive"
+        });
         setLoading(false);
-      }, 500);
+      }
     };
 
     fetchResearcher();
@@ -68,7 +89,7 @@ const ResearcherProfilePage = () => {
           <ArrowLeft size={16} /> Voltar
         </Button>
       </div>
-      <ResearcherProfile researcherId={id} />
+      <ResearcherProfile researcherId={id || 'current'} isEditable={isCurrentUser} />
     </div>
   );
 };
