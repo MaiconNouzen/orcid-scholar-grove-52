@@ -6,13 +6,13 @@ import ProjectSection from '../components/ProjectSection';
 import { mockResearcherData } from '../data/mockData';
 import { Researcher } from '../types';
 import { Card } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FileText, Briefcase, User } from 'lucide-react';
+import ProfileHeader from '../components/ProfileHeader';
+import PublicationChart from '../components/PublicationChart';
+import ProjectPublicationChart from '../components/ProjectPublicationChart';
 
 const Index = () => {
   const [researcher, setResearcher] = useState<Researcher | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("profile");
 
   useEffect(() => {
     // In a real app, we would fetch the current user's profile data from an API
@@ -37,45 +37,100 @@ const Index = () => {
       {researcher && (
         <div className="container mx-auto px-4">
           <Card className="p-6 mb-6">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
-              <h1 className="text-2xl md:text-3xl font-serif font-bold text-blue-800">{researcher.name}</h1>
+            <ProfileHeader researcher={researcher} />
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+              <div className="md:col-span-2">
+                <Card className="p-4 mb-6">
+                  <h3 className="text-xl font-bold mb-4 text-blue-800">Biografia</h3>
+                  <p className="text-gray-700">{researcher.bio}</p>
+                  
+                  {researcher.researchAreas.length > 0 && (
+                    <div className="mt-4">
+                      <h4 className="font-semibold text-gray-800 mb-2">Áreas de Pesquisa</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {researcher.researchAreas.map((area, index) => (
+                          <span key={index} className="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-sm">
+                            {area}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {researcher.education && researcher.education.length > 0 && (
+                    <div className="mt-4">
+                      <h4 className="font-semibold text-gray-800 mb-2">Formação Acadêmica</h4>
+                      <ul className="list-disc list-inside space-y-1 text-gray-700">
+                        {researcher.education.map((edu, index) => (
+                          <li key={index}>{edu}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </Card>
+              </div>
+              
+              <div className="md:col-span-1">
+                <Card className="p-4">
+                  <h3 className="text-xl font-bold mb-4 text-blue-800">Links Acadêmicos</h3>
+                  <ul className="space-y-2">
+                    {researcher.institutionalPage && (
+                      <li className="flex items-center text-blue-600 hover:text-blue-800">
+                        <a href={researcher.institutionalPage} target="_blank" rel="noopener noreferrer">
+                          Página Institucional
+                        </a>
+                      </li>
+                    )}
+                    {researcher.orcidId && (
+                      <li className="flex items-center text-blue-600 hover:text-blue-800">
+                        <a href={`https://orcid.org/${researcher.orcidId}`} target="_blank" rel="noopener noreferrer">
+                          Perfil ORCID
+                        </a>
+                      </li>
+                    )}
+                    {researcher.externalLinks && researcher.externalLinks.map((link, index) => (
+                      <li key={index} className="flex items-center text-blue-600 hover:text-blue-800">
+                        <a href={link.url} target="_blank" rel="noopener noreferrer">
+                          {link.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </div>
             </div>
 
-            <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="profile" className="flex items-center gap-2">
-                  <User className="h-4 w-4" />
-                  Perfil
-                </TabsTrigger>
-                <TabsTrigger value="publications" className="flex items-center gap-2">
-                  <FileText className="h-4 w-4" />
-                  Publicações
-                </TabsTrigger>
-                <TabsTrigger value="projects" className="flex items-center gap-2">
-                  <Briefcase className="h-4 w-4" />
-                  Projetos
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="profile" className="pt-6">
-                <ResearcherProfile researcher={researcher} showFullProfile={true} />
-              </TabsContent>
+            {/* Publication Charts */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+              <Card className="p-4">
+                <h3 className="text-xl font-bold mb-4 text-blue-800">Evolução de Publicações por Ano</h3>
+                <PublicationChart publications={researcher.publications || []} />
+              </Card>
               
-              <TabsContent value="publications" className="pt-6">
-                <PublicationSection 
+              <Card className="p-4">
+                <h3 className="text-xl font-bold mb-4 text-blue-800">Publicações por Projeto</h3>
+                <ProjectPublicationChart 
                   publications={researcher.publications || []} 
-                  allowEdit={true} 
-                />
-              </TabsContent>
-              
-              <TabsContent value="projects" className="pt-6">
-                <ProjectSection 
                   projects={researcher.projects || []} 
-                  publications={researcher.publications || []} 
-                  allowEdit={true}
                 />
-              </TabsContent>
-            </Tabs>
+              </Card>
+            </div>
+
+            {/* Publications Section */}
+            <div className="mt-8">
+              <PublicationSection
+                publications={researcher.publications || []}
+                allowEdit={true}
+              />
+            </div>
+
+            {/* Projects Section */}
+            <ProjectSection
+              projects={researcher.projects || []}
+              publications={researcher.publications || []}
+              allowEdit={true}
+            />
           </Card>
         </div>
       )}
