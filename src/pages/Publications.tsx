@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, FileText, Search, Filter } from 'lucide-react';
+import { Plus, FileText, Search, Filter, Pencil } from 'lucide-react';
 import { mockResearcherData } from '../data/mockData';
 import { Publication } from '../types';
 import { Input } from '@/components/ui/input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Publications = () => {
+  const navigate = useNavigate();
   const [publications, setPublications] = useState<Publication[]>([...mockResearcherData.publications] as Publication[]);
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,6 +30,10 @@ const Publications = () => {
     });
 
   const publicationTypes = [...new Set(publications.map(pub => pub.type))];
+  
+  const handleEditPublication = (index) => {
+    navigate(`/edit-publication/${index}`);
+  };
   
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -79,16 +84,27 @@ const Publications = () => {
                 <Card key={index} className="p-4 bg-white border-gray-200 hover:border-blue-300 transition-colors">
                   <div className="flex items-start">
                     <FileText className="text-blue-500 mr-3 mt-1 flex-shrink-0" />
-                    <div>
+                    <div className="flex-1">
                       <h3 className="font-medium text-blue-800 mb-1">{pub.title}</h3>
                       <p className="text-sm text-gray-600 mb-2">{pub.authors.map(a => a.name).join(', ')}</p>
                       <div className="flex flex-wrap gap-2 mb-2">
                         <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">{pub.type}</span>
                         <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full">{pub.year}</span>
                       </div>
-                      <Link to={`/publication/${index}`} className="text-sm text-blue-600 hover:underline">
-                        Ver detalhes
-                      </Link>
+                      <div className="flex justify-between items-center">
+                        <Link to={`/publication/${index}`} className="text-sm text-blue-600 hover:underline">
+                          Ver detalhes
+                        </Link>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="text-gray-500 hover:text-blue-600"
+                          onClick={() => handleEditPublication(index)}
+                        >
+                          <Pencil className="w-4 h-4" />
+                          Editar
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </Card>
@@ -107,10 +123,21 @@ const Publications = () => {
                       <p className="text-sm text-gray-500 mt-1">{pub.source}, {pub.year}</p>
                     </div>
                     <div className="flex flex-col items-end">
-                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">{pub.type}</span>
-                      <Link to={`/publication/${index}`} className="text-sm text-blue-600 hover:underline mt-2">
-                        Ver detalhes
-                      </Link>
+                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full mb-2">{pub.type}</span>
+                      <div className="flex gap-2">
+                        <Link to={`/publication/${index}`} className="text-sm text-blue-600 hover:underline">
+                          Ver detalhes
+                        </Link>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="text-gray-500 hover:text-blue-600"
+                          onClick={() => handleEditPublication(index)}
+                        >
+                          <Pencil className="w-4 h-4" />
+                          Editar
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </Card>

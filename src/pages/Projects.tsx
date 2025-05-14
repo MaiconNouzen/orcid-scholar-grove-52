@@ -2,14 +2,15 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus, Calendar, FileText, Search } from 'lucide-react';
+import { Plus, Calendar, FileText, Search, Pencil } from 'lucide-react';
 import { mockResearcherData } from '../data/mockData';
 import { Project } from '../types';
 import { Input } from '@/components/ui/input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Progress } from '@/components/ui/progress';
 
 const Projects = () => {
+  const navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>([...mockResearcherData.projects] as Project[]);
   const [searchQuery, setSearchQuery] = useState('');
   
@@ -40,6 +41,10 @@ const Projects = () => {
     if (progress === 100) return 'text-gray-500';
     if (progress >= 75) return 'text-orange-500';
     return 'text-green-500';
+  };
+  
+  const handleEditProject = (projectId) => {
+    navigate(`/edit-project/${projectId}`);
   };
   
   return (
@@ -97,16 +102,27 @@ const Projects = () => {
                   </div>
                   <Progress value={calculateProgress(project)} className="h-2 mb-4" />
                   
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <div className="flex items-center">
                       <FileText className="h-4 w-4 mr-1 text-blue-500" />
                       <span className="text-sm text-gray-600">
                         {(project.publications?.length || 0)} publicações
                       </span>
                     </div>
-                    <Link to={`/project/${project.id}`} className="text-sm text-blue-600 hover:underline">
-                      Ver detalhes
-                    </Link>
+                    <div className="flex items-center gap-3">
+                      <Link to={`/project/${project.id}`} className="text-sm text-blue-600 hover:underline">
+                        Ver detalhes
+                      </Link>
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="text-gray-500 hover:text-blue-600 flex items-center gap-1"
+                        onClick={() => handleEditProject(project.id)}
+                      >
+                        <Pencil className="w-4 h-4" />
+                        Editar
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
