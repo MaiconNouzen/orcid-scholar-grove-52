@@ -2,6 +2,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Publication } from '../types';
+import { ChartContainer } from '@/components/ui/chart';
 
 interface PublicationChartProps {
   publications: Publication[];
@@ -29,9 +30,28 @@ const PublicationChart = ({ publications, projectFilter }: PublicationChartProps
     parseInt(a.year) - parseInt(b.year)
   );
 
+  // Handle the case when there's no data
+  if (data.length === 0) {
+    return (
+      <div className="h-60 flex items-center justify-center text-gray-500">
+        Nenhuma publicação disponível para mostrar no gráfico
+      </div>
+    );
+  }
+
+  const config = {
+    publications: {
+      label: 'Publicações',
+      theme: {
+        light: '#1E40AF', // dark blue
+        dark: '#3B82F6',  // blue
+      },
+    },
+  };
+
   return (
     <div className="h-60">
-      <ResponsiveContainer width="100%" height="100%">
+      <ChartContainer config={config}>
         <BarChart
           data={data}
           margin={{ top: 10, right: 10, left: 0, bottom: 5 }}
@@ -39,12 +59,12 @@ const PublicationChart = ({ publications, projectFilter }: PublicationChartProps
           <XAxis dataKey="year" />
           <YAxis allowDecimals={false} />
           <Tooltip 
-            formatter={(value) => [`${value} publicações`]} 
+            formatter={(value) => [`${value} publicações`, 'Publicações']} 
             labelFormatter={(value) => `Ano: ${value}`}
           />
-          <Bar dataKey="count" fill="#1E40AF" name="Publicações" />
+          <Bar dataKey="count" name="Publicações" fill="var(--color-publications)" />
         </BarChart>
-      </ResponsiveContainer>
+      </ChartContainer>
     </div>
   );
 };

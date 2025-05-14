@@ -6,7 +6,7 @@ import { Link } from 'lucide-react';
 import ProfileHeader from './ProfileHeader';
 import PublicationChart from './PublicationChart';
 import ProjectPublicationChart from './ProjectPublicationChart';
-import { mockResearcherData, mockResearchers } from '../data/mockData';
+import { mockResearcherData } from '../data/mockData';
 import { Researcher } from '../types';
 
 interface ResearcherProfileProps {
@@ -29,14 +29,30 @@ const ResearcherProfile = ({ researcherId, showFullProfile = true }: ResearcherP
       // });
       // const data = await response.json();
       
+      console.log("Fetching data for researcher:", researcherId);
+      
       // For now, we use our mock data
       setTimeout(() => {
+        // Always use mockResearcherData as fallback
+        let foundResearcher = mockResearcherData;
+        
         if (researcherId && researcherId !== 'current') {
-          const found = mockResearchers.find(r => r.orcidId === researcherId);
-          setResearcher(found || mockResearcherData as Researcher);
-        } else {
-          setResearcher(mockResearcherData as Researcher);
+          // Find the researcher in our mock data
+          // Import and use mockResearchers here
+          const { mockResearchers, joaoResearcher } = require('../data/mockData');
+          
+          if (researcherId === joaoResearcher.orcidId) {
+            foundResearcher = joaoResearcher;
+          } else {
+            const found = mockResearchers.find(r => r.orcidId === researcherId);
+            if (found) {
+              foundResearcher = found;
+            }
+          }
         }
+        
+        console.log("Setting researcher data:", foundResearcher.name);
+        setResearcher(foundResearcher);
         setLoading(false);
       }, 500);
     };
@@ -108,7 +124,7 @@ const ResearcherProfile = ({ researcherId, showFullProfile = true }: ResearcherP
                     Perfil ORCID
                   </a>
                 </li>
-                {researcher.externalLinks.map((link, index) => (
+                {researcher.externalLinks && researcher.externalLinks.map((link, index) => (
                   <li key={index} className="flex items-center text-blue-600 hover:text-blue-800">
                     <Link className="w-4 h-4 mr-2" />
                     <a href={link.url} target="_blank" rel="noopener noreferrer">
@@ -129,11 +145,14 @@ const ResearcherProfile = ({ researcherId, showFullProfile = true }: ResearcherP
                 </TabsList>
                 
                 <TabsContent value="publications">
-                  <PublicationChart publications={researcher.publications} />
+                  <PublicationChart publications={researcher.publications || []} />
                 </TabsContent>
                 
                 <TabsContent value="projects">
-                  <ProjectPublicationChart publications={researcher.publications} projects={researcher.projects} />
+                  <ProjectPublicationChart 
+                    publications={researcher.publications || []} 
+                    projects={researcher.projects || []} 
+                  />
                 </TabsContent>
               </Tabs>
             </Card>

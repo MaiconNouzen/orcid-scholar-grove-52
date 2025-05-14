@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -36,6 +36,8 @@ const App = () => (
             <Route path="/researcher/:id" element={<ResearcherProfilePage />} />
             <Route path="/edit-publication/:id" element={<EditPublicationPage />} />
             <Route path="/edit-project/:id" element={<EditProjectPage />} />
+            {/* Add a researcher profile redirect for João */}
+            <Route path="/profile/joao" element={<Navigate to="/researcher/0000-0002-1234-5678" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

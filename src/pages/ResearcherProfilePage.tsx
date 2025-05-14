@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, FileText, Briefcase, User } from 'lucide-react';
-import { mockResearcherData, mockResearchers } from '../data/mockData';
+import { mockResearcherData, mockResearchers, joaoResearcher } from '../data/mockData';
 import { Researcher } from '../types';
 import ResearcherProfile from '../components/ResearcherProfile';
 import PublicationSection from '../components/PublicationSection';
@@ -26,12 +26,19 @@ const ResearcherProfilePage = () => {
   useEffect(() => {
     const fetchResearcher = async () => {
       setLoading(true);
+      console.log("Fetching researcher data for ID:", id);
+      
       // In a real app, fetch from API using the ID
       // Here we're using mock data
       setTimeout(() => {
         if (id === 'current') {
-          setResearcher(mockResearcherData as Researcher);
+          console.log("Using current researcher data");
+          setResearcher(mockResearcherData);
+        } else if (id === joaoResearcher.orcidId) {
+          console.log("Using João's researcher data");
+          setResearcher(joaoResearcher);
         } else {
+          console.log("Looking for researcher in mockResearchers");
           const found = mockResearchers.find(r => r.orcidId === id);
           setResearcher(found || null);
         }
@@ -65,6 +72,10 @@ const ResearcherProfilePage = () => {
       </div>
     );
   }
+
+  console.log("Rendering researcher profile:", researcher.name);
+  console.log("Publications:", researcher.publications?.length || 0);
+  console.log("Projects:", researcher.projects?.length || 0);
 
   return (
     <div className="min-h-screen bg-gray-50 pt-6">
@@ -115,15 +126,15 @@ const ResearcherProfilePage = () => {
             
             <TabsContent value="publications" className="pt-6">
               <PublicationSection 
-                publications={researcher.publications} 
+                publications={researcher.publications || []} 
                 allowEdit={isCurrentUser()} 
               />
             </TabsContent>
             
             <TabsContent value="projects" className="pt-6">
               <ProjectSection 
-                projects={researcher.projects} 
-                publications={researcher.publications} 
+                projects={researcher.projects || []} 
+                publications={researcher.publications || []} 
                 allowEdit={isCurrentUser()}
               />
             </TabsContent>
