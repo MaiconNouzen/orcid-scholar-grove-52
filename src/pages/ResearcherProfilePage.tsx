@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, FileText, Briefcase, User } from 'lucide-react';
-import { mockResearcherData, mockResearchers, joaoResearcher } from '../data/mockData';
+import { mockResearcherData, joaoResearcher } from '../data/mockData';
 import { Researcher } from '../types';
 import ResearcherProfile from '../components/ResearcherProfile';
 import PublicationSection from '../components/PublicationSection';
@@ -29,7 +29,6 @@ const ResearcherProfilePage = () => {
       console.log("Fetching researcher data for ID:", id);
       
       // In a real app, fetch from API using the ID
-      // Here we're using mock data
       setTimeout(() => {
         if (id === 'current') {
           console.log("Using current researcher data");
@@ -39,6 +38,8 @@ const ResearcherProfilePage = () => {
           setResearcher(joaoResearcher);
         } else {
           console.log("Looking for researcher in mockResearchers");
+          // Import directly to avoid circular reference
+          const { mockResearchers } = require('../data/mockData');
           const found = mockResearchers.find(r => r.orcidId === id);
           setResearcher(found || null);
         }
@@ -121,7 +122,7 @@ const ResearcherProfilePage = () => {
             </TabsList>
 
             <TabsContent value="profile" className="pt-6">
-              <ResearcherProfile researcherId={id} showFullProfile={false} />
+              <ResearcherProfile researcher={researcher} showFullProfile={false} />
             </TabsContent>
             
             <TabsContent value="publications" className="pt-6">

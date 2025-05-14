@@ -1,66 +1,32 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Link } from 'lucide-react';
 import ProfileHeader from './ProfileHeader';
 import PublicationChart from './PublicationChart';
 import ProjectPublicationChart from './ProjectPublicationChart';
-import { mockResearcherData } from '../data/mockData';
 import { Researcher } from '../types';
 
 interface ResearcherProfileProps {
+  researcher?: Researcher;
   researcherId?: string;
   showFullProfile?: boolean;
 }
 
-const ResearcherProfile = ({ researcherId, showFullProfile = true }: ResearcherProfileProps) => {
-  const [researcher, setResearcher] = useState<Researcher | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [activeChartTab, setActiveChartTab] = useState("publications");
+const ResearcherProfile = ({ researcher, researcherId, showFullProfile = true }: ResearcherProfileProps) => {
+  const [activeChartTab, setActiveChartTab] = React.useState("publications");
 
-  // This is where we would fetch data from ORCID API in a real implementation
-  useEffect(() => {
-    const fetchOrcidData = async () => {
-      setLoading(true);
-      // In a real implementation, we'd call the ORCID API here
-      // const response = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/record`, {
-      //   headers: { 'Accept': 'application/json' }
-      // });
-      // const data = await response.json();
-      
-      console.log("Fetching data for researcher:", researcherId);
-      
-      // For now, we use our mock data
-      setTimeout(() => {
-        // Always use mockResearcherData as fallback
-        let foundResearcher = mockResearcherData;
-        
-        if (researcherId && researcherId !== 'current') {
-          // Find the researcher in our mock data
-          // Import and use mockResearchers here
-          const { mockResearchers, joaoResearcher } = require('../data/mockData');
-          
-          if (researcherId === joaoResearcher.orcidId) {
-            foundResearcher = joaoResearcher;
-          } else {
-            const found = mockResearchers.find(r => r.orcidId === researcherId);
-            if (found) {
-              foundResearcher = found;
-            }
-          }
-        }
-        
-        console.log("Setting researcher data:", foundResearcher.name);
-        setResearcher(foundResearcher);
-        setLoading(false);
-      }, 500);
-    };
+  // If researcher is not provided, use the researcherId from props to fetch it
+  React.useEffect(() => {
+    if (!researcher && researcherId) {
+      console.log("ResearcherProfile should load data for ID:", researcherId);
+      // This would be implemented if we weren't passing the researcher directly
+    }
+  }, [researcher, researcherId]);
 
-    fetchOrcidData();
-  }, [researcherId]);
-
-  if (loading || !researcher) {
+  // If we're still waiting for the researcher data
+  if (!researcher) {
     return (
       <div className="container mx-auto px-4 py-8 flex justify-center items-center">
         <div className="text-center">
@@ -74,8 +40,6 @@ const ResearcherProfile = ({ researcherId, showFullProfile = true }: ResearcherP
   if (!showFullProfile) {
     return (
       <div className="container mx-auto px-4 max-w-5xl">
-        <ProfileHeader researcher={researcher} />
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
           <div className="md:col-span-2">
             <Card className="p-4 mb-6">
