@@ -13,9 +13,10 @@ import { Researcher } from '../types';
 
 interface ResearcherProfileProps {
   researcherId?: string;
+  isEditable?: boolean;
 }
 
-const ResearcherProfile = ({ researcherId }: ResearcherProfileProps) => {
+const ResearcherProfile = ({ researcherId, isEditable = false }: ResearcherProfileProps) => {
   const [researcher, setResearcher] = useState<Researcher | null>(null);
   const [loading, setLoading] = useState(false);
   const [activeChartTab, setActiveChartTab] = useState("publications");
