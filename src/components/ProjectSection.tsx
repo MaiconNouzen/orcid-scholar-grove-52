@@ -2,105 +2,110 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Publication, Project } from '../types';
-import { Link } from 'react-router-dom';
-import { Plus, Briefcase } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface ProjectSectionProps {
-  projects: Project[];
-  publications: Publication[];
-  allowEdit?: boolean;
-}
+const ProjectSection = ({ projects, publications }) => {
+  const navigate = useNavigate();
+  const [expandedProjects, setExpandedProjects] = useState({});
 
-const ProjectSection = ({ projects, publications, allowEdit = false }: ProjectSectionProps) => {
-  const [expandedProject, setExpandedProject] = useState<string | null>(null);
-
-  const toggleProject = (id: string) => {
-    if (expandedProject === id) {
-      setExpandedProject(null);
-    } else {
-      setExpandedProject(id);
-    }
+  const toggleExpand = (projectId) => {
+    setExpandedProjects(prev => ({
+      ...prev,
+      [projectId]: !prev[projectId]
+    }));
   };
 
-  // Get publications for a specific project
-  const getProjectPublications = (projectId: string) => {
-    return publications.filter(pub => pub.project === projectId);
+  // Count publications by project
+  const getProjectPublications = (projectName) => {
+    return publications.filter(pub => pub.project === projectName);
+  };
+
+  const handleEditProject = (projectId, e) => {
+    e.stopPropagation();
+    navigate(`/edit-project/${projectId}`);
   };
 
   return (
-    <Card className="p-6 mt-8 bg-white border-blue-100">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold text-blue-800 flex items-center gap-2">
-          <Briefcase className="h-5 w-5" /> 
-          Projetos de Pesquisa
-        </h2>
-        
-        {allowEdit && (
-          <Link to="/edit-project/new">
-            <Button size="sm" className="flex items-center gap-1">
-              <Plus className="h-4 w-4" /> Novo Projeto
-            </Button>
-          </Link>
-        )}
+    <Card className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="section-title">Projetos de Pesquisa</h2>
+        <Button 
+          variant="outline" 
+          onClick={() => navigate('/projects')}
+          className="text-sm"
+        >
+          Ver todos
+        </Button>
       </div>
-
-      <div className="space-y-4">
-        {projects.length > 0 ? (
-          projects
-            .sort((a, b) => Number(b.startYear) - Number(a.startYear))
-            .map((project) => (
-              <Card key={project.id} className="p-4 hover:shadow-md transition-shadow">
-                <div className="flex justify-between">
-                  <div>
-                    <h3 className="font-bold text-blue-700">{project.name}</h3>
-                    <p className="text-sm text-gray-600">{project.startYear} - {project.endYear}</p>
-                  </div>
-                  {allowEdit && (
-                    <Link to={`/edit-project/${project.id}`}>
-                      <Button variant="outline" size="sm">Editar</Button>
-                    </Link>
-                  )}
-                </div>
-
-                <p className="mt-2 text-gray-700">{project.description}</p>
-                
-                {project.fundingAgency && (
-                  <p className="mt-2 text-sm">
-                    <span className="font-medium">Financiador:</span> {project.fundingAgency}
-                  </p>
-                )}
-
-                {getProjectPublications(project.id).length > 0 && (
-                  <div className="mt-3">
-                    <Button 
-                      variant="link" 
-                      size="sm" 
-                      className="text-blue-600 p-0"
-                      onClick={() => toggleProject(project.id)}
+      
+      {projects.length === 0 ? (
+        <p className="text-gray-500">Nenhum projeto encontrado.</p>
+      ) : (
+        <div className="space-y-4">
+          {projects.map((project) => {
+            const projectPubs = getProjectPublications(project.name);
+            
+            return (
+              <div key={project.id} className="border border-gray-200 rounded-md bg-white">
+                <div 
+                  className="accordion-header relative"
+                  onClick={() => toggleExpand(project.id)}
+                >
+                  <h3 className="font-medium">{project.name}</h3>
+                  <div className="flex items-center">
+                    <span className="text-sm text-gray-500 mr-2">
+                      {projectPubs.length} publicações
+                    </span>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="mr-2 text-gray-500 hover:text-blue-600"
+                      onClick={(e) => handleEditProject(project.id, e)}
                     >
-                      {expandedProject === project.id ? 'Esconder publicações' : `Ver ${getProjectPublications(project.id).length} publicações`}
+                      <Edit className="w-4 h-4" />
                     </Button>
-                    
-                    {expandedProject === project.id && (
-                      <ul className="mt-2 space-y-2 pl-4 border-l-2 border-blue-200">
-                        {getProjectPublications(project.id).map((pub) => (
-                          <li key={pub.id || pub.title} className="text-sm">
-                            <Link to={`/edit-publication/${pub.id}`} className="hover:text-blue-600">
-                              {pub.title} ({pub.year})
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                    {expandedProjects[project.id] ? (
+                      <ChevronUp className="w-5 h-5" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5" />
                     )}
                   </div>
+                </div>
+                
+                {expandedProjects[project.id] && (
+                  <div className="p-4 border-t border-gray-200">
+                    <p className="text-sm text-gray-700 mb-4">{project.description}</p>
+                    
+                    <div>
+                      <h4 className="text-sm font-medium mb-2">Período: {project.startYear} - {project.endYear || "Atual"}</h4>
+                      
+                      {project.funding && (
+                        <p className="text-sm text-gray-700 mb-3">
+                          <span className="font-medium">Financiamento:</span> {project.funding}
+                        </p>
+                      )}
+                      
+                      <h4 className="text-sm font-medium mb-2">Publicações associadas:</h4>
+                      {projectPubs.length > 0 ? (
+                        <ul className="list-disc list-inside text-sm space-y-2 ml-2">
+                          {projectPubs.map((pub, index) => (
+                            <li key={index}>
+                              <span className="text-blue-600">{pub.title}</span> ({pub.year})
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-sm text-gray-500">Nenhuma publicação associada a este projeto.</p>
+                      )}
+                    </div>
+                  </div>
                 )}
-              </Card>
-            ))
-        ) : (
-          <p className="text-gray-500 text-center py-6">Nenhum projeto encontrado.</p>
-        )}
-      </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </Card>
   );
 };

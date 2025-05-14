@@ -1,112 +1,11 @@
 
-import researchersList from './mockResearchers';
+import mockResearchers from './mockResearchers';
 
-// Define joaoResearcher
-export const joaoResearcher = {
-  name: "João da Silva",
-  orcidId: "0000-0002-1234-5678",
-  institution: "Universidade Federal de São Paulo",
-  department: "Departamento de Ciência da Computação",
-  role: "Professor Associado",
-  bio: "João da Silva é professor associado da Universidade Federal de São Paulo com foco em inteligência artificial e aprendizado de máquina. Possui doutorado pela USP e pós-doutorado pela Universidade de Stanford.",
-  email: "joao.silva@unifesp.edu.br",
-  researchAreas: ["Inteligência Artificial", "Aprendizado de Máquina", "Visão Computacional"],
-  education: [
-    "Ph.D. em Ciência da Computação, USP, 2010",
-    "Mestrado em Ciência da Computação, UNICAMP, 2006",
-    "Bacharelado em Ciência da Computação, UNIFESP, 2004"
-  ],
-  awards: [
-    "Pesquisador Destaque FAPESP, 2019",
-    "Melhor Artigo na Conferência Brasileira de IA, 2017"
-  ],
-  institutionalPage: "https://www.unifesp.br/docentes/joaosilva",
-  externalLinks: [
-    {
-      name: "Google Scholar",
-      url: "https://scholar.google.com/citations?user=joaosilva"
-    },
-    {
-      name: "ResearchGate",
-      url: "https://www.researchgate.net/profile/Joao-Silva-25"
-    }
-  ],
-  publications: [
-    {
-      id: "j1",
-      title: "Abordagens de Aprendizado Profundo para Detecção de Objetos em Tempo Real",
-      authors: [
-        { name: "João da Silva", orcidId: "0000-0002-1234-5678" },
-        { name: "Maria Santos", orcidId: "0000-0001-9876-5432" }
-      ],
-      year: 2022,
-      type: "Journal Article",
-      source: "Revista Brasileira de Computação",
-      identifier: { type: "DOI", value: "10.1000/j.comp.2022.01.001" },
-      abstract: "Esta pesquisa apresenta uma nova abordagem para detecção de objetos em tempo real utilizando técnicas de aprendizado profundo, com foco em aplicações em dispositivos móveis.",
-      links: [
-        { name: "PDF", url: "https://example.com/paper1.pdf" }
-      ],
-      project: "p1"
-    },
-    {
-      id: "j2",
-      title: "Um Framework para Análise de Sentimentos em Português Brasileiro",
-      authors: [
-        { name: "João da Silva", orcidId: "0000-0002-1234-5678" },
-        { name: "Pedro Almeida", orcidId: "0000-0003-4567-8901" }
-      ],
-      year: 2021,
-      type: "Conference Paper",
-      source: "Conferência Internacional de PLN",
-      identifier: { type: "DOI", value: "10.1000/conf.pln.2021.05.012" },
-      abstract: "Apresentamos um framework completo para análise de sentimentos em textos escritos em português brasileiro, incluindo novos conjuntos de dados anotados e modelos pré-treinados.",
-      links: [
-        { name: "Código", url: "https://github.com/joaosilva/sentimento-pt-br" }
-      ],
-      project: "p2"
-    },
-    {
-      id: "j3",
-      title: "Modelos Generativos para Síntese de Imagens Médicas",
-      authors: [
-        { name: "João da Silva", orcidId: "0000-0002-1234-5678" }
-      ],
-      year: 2020,
-      type: "Book Chapter",
-      source: "Avanços em IA para Medicina",
-      identifier: { type: "ISBN", value: "978-3-16-148410-0" },
-      abstract: "Este capítulo explora o uso de modelos generativos adversariais (GANs) para a síntese de imagens médicas, com aplicações em treinamento de algoritmos de diagnóstico automático.",
-      links: [],
-      project: "p1"
-    }
-  ],
-  projects: [
-    {
-      id: "p1",
-      name: "IA para Análise de Imagens Médicas",
-      description: "Desenvolvimento de técnicas de aprendizado profundo para análise automática de imagens médicas, com foco em detecção precoce de doenças.",
-      startYear: 2020,
-      endYear: 2023,
-      fundingAgency: "FAPESP",
-      role: "Coordenador"
-    },
-    {
-      id: "p2",
-      name: "PLN para Análise de Mídias Sociais",
-      description: "Aplicação de técnicas de processamento de linguagem natural para análise de conteúdo em mídias sociais em português brasileiro.",
-      startYear: 2019,
-      endYear: 2022,
-      fundingAgency: "CNPq",
-      role: "Pesquisador Principal"
-    }
-  ]
-};
+export { mockResearchers };
 
-// Define mockResearcherData
 export const mockResearcherData = {
   name: "Maria Oliveira Silva",
-  orcidId: "0000-0002-1234-5679",
+  orcidId: "0000-0002-1234-5678",
   institution: "Universidade de São Paulo (ICMC-USP)",
   bio: "Pesquisadora na área de Ciência da Computação com foco em Inteligência Artificial e Aprendizado de Máquina aplicados a problemas complexos.",
   researchAreas: ["Inteligência Artificial", "Aprendizado de Máquina", "Processamento de Linguagem Natural", "Ciência de Dados"],
@@ -120,7 +19,7 @@ export const mockResearcherData = {
     {
       title: "Aplicações de Deep Learning para Detecção de Fraudes em Sistemas Financeiros",
       authors: [
-        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5679" },
+        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" },
         { name: "João Santos", orcidId: "0000-0003-2345-6789" }
       ],
       year: 2023,
@@ -137,7 +36,7 @@ export const mockResearcherData = {
     {
       title: "Modelos Transformers para Análise de Sentimentos em Português",
       authors: [
-        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5679" },
+        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" },
         { name: "Ana Pereira", orcidId: "0000-0001-5678-9012" }
       ],
       year: 2022,
@@ -155,7 +54,7 @@ export const mockResearcherData = {
       title: "Algoritmos de Otimização para Roteamento em Redes IoT",
       authors: [
         { name: "Carlos Ferreira", orcidId: "0000-0004-6789-0123" },
-        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5679" }
+        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" }
       ],
       year: 2021,
       type: "Journal Article",
@@ -170,7 +69,7 @@ export const mockResearcherData = {
     {
       title: "Técnicas de Mineração de Dados para Detecção de Padrões em Registros Médicos",
       authors: [
-        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5679" },
+        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" },
         { name: "Roberto Almeida", orcidId: "0000-0005-9876-5432" }
       ],
       year: 2021,
@@ -187,7 +86,7 @@ export const mockResearcherData = {
       title: "Abordagem Híbrida para Sistemas de Recomendação com Feedback Implícito",
       authors: [
         { name: "Ana Pereira", orcidId: "0000-0001-5678-9012" },
-        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5679" }
+        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" }
       ],
       year: 2020,
       type: "Conference Paper",
@@ -203,7 +102,7 @@ export const mockResearcherData = {
     {
       title: "Privacidade em Sistemas de Aprendizado Federado: Desafios e Soluções",
       authors: [
-        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5679" }
+        { name: "Maria Oliveira Silva", orcidId: "0000-0002-1234-5678" }
       ],
       year: 2019,
       type: "Journal Article",
@@ -252,30 +151,3 @@ export const mockResearcherData = {
     }
   ]
 };
-
-// Define complete mockResearchers array
-export const mockResearchers = [
-  joaoResearcher,
-  {
-    name: "Maria Santos",
-    orcidId: "0000-0001-9876-5432",
-    institution: "Universidade de São Paulo",
-    bio: "Pesquisadora na área de inteligência artificial com foco em aprendizado de máquina.",
-    researchAreas: ["Machine Learning", "Data Science"],
-    institutionalPage: "https://www.usp.br/",
-    externalLinks: [],
-    publications: [],
-    projects: []
-  },
-  {
-    name: "Pedro Almeida",
-    orcidId: "0000-0003-4567-8901",
-    institution: "Universidade Estadual de Campinas",
-    bio: "Especialista em processamento de linguagem natural e recuperação de informação.",
-    researchAreas: ["NLP", "Information Retrieval"],
-    institutionalPage: "https://www.unicamp.br/",
-    externalLinks: [],
-    publications: [],
-    projects: []
-  }
-];

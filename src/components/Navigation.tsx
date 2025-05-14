@@ -4,11 +4,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { 
   Home,
   User, 
+  FileText, 
+  Briefcase, 
   Search as SearchIcon, 
   Settings, 
-  LogIn,
-  FileText,
-  Briefcase
+  LogIn
 } from 'lucide-react';
 
 const Navigation = () => {
@@ -16,7 +16,7 @@ const Navigation = () => {
   
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
-    { path: '/profile', label: 'Meu Perfil', icon: User },
+    { path: '/profile', label: 'Perfil', icon: User },
     { path: '/publications', label: 'Publicações', icon: FileText },
     { path: '/projects', label: 'Projetos', icon: Briefcase },
     { path: '/search', label: 'Buscar', icon: SearchIcon },
@@ -74,8 +74,8 @@ const Navigation = () => {
       
       {/* Mobile navigation */}
       <div className="md:hidden border-t border-gray-200">
-        <div className="grid grid-cols-4">
-          {navItems.slice(0, 4).map((item) => {
+        <div className="grid grid-cols-5">
+          {navItems.slice(0, 5).map((item) => {
             const IconComponent = item.icon;
             const isActive = location.pathname === item.path;
             
