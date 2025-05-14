@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp, Link, Edit } from 'lucide-react';
+import { ChevronDown, ChevronUp, Link } from 'lucide-react';
 import PublicationItem from './PublicationItem';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,10 +35,6 @@ const PublicationSection = ({ publications }) => {
     type,
     count: groupedPublications[type].length
   }));
-
-  const handleEdit = (index) => {
-    navigate(`/edit-publication/${index}`);
-  };
 
   return (
     <Card className="p-4 mb-6">
@@ -78,19 +74,8 @@ const PublicationSection = ({ publications }) => {
                 {expandedTypes[type] && (
                   <div className="mt-2 space-y-4">
                     {typePubs.map((pub, index) => (
-                      <div key={index} className="relative">
+                      <div key={index}>
                         <PublicationItem publication={pub} />
-                        <Button 
-                          size="sm" 
-                          variant="ghost" 
-                          className="absolute top-3 right-12 text-gray-500 hover:text-blue-600"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleEdit(publications.indexOf(pub));
-                          }}
-                        >
-                          <Edit className="w-4 h-4" />
-                        </Button>
                       </div>
                     ))}
                   </div>

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp, Edit } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const ProjectSection = ({ projects, publications }) => {
@@ -19,11 +19,6 @@ const ProjectSection = ({ projects, publications }) => {
   // Count publications by project
   const getProjectPublications = (projectName) => {
     return publications.filter(pub => pub.project === projectName);
-  };
-
-  const handleEditProject = (projectId, e) => {
-    e.stopPropagation();
-    navigate(`/edit-project/${projectId}`);
   };
 
   return (
@@ -49,7 +44,7 @@ const ProjectSection = ({ projects, publications }) => {
             return (
               <div key={project.id} className="border border-gray-200 rounded-md bg-white">
                 <div 
-                  className="accordion-header relative"
+                  className="accordion-header"
                   onClick={() => toggleExpand(project.id)}
                 >
                   <h3 className="font-medium">{project.name}</h3>
@@ -57,14 +52,6 @@ const ProjectSection = ({ projects, publications }) => {
                     <span className="text-sm text-gray-500 mr-2">
                       {projectPubs.length} publicações
                     </span>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="mr-2 text-gray-500 hover:text-blue-600"
-                      onClick={(e) => handleEditProject(project.id, e)}
-                    >
-                      <Edit className="w-4 h-4" />
-                    </Button>
                     {expandedProjects[project.id] ? (
                       <ChevronUp className="w-5 h-5" />
                     ) : (

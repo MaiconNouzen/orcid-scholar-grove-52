@@ -59,7 +59,7 @@ const ProfileViewWrapper = ({ isEditable, children, researcherId }: ProfileViewW
         <TabsContent value="publications" className="mt-0">
           {isEditable ? (
             <div className="flex flex-col items-center justify-center py-8">
-              <p className="text-gray-600 mb-4">Gerencie suas publicações na aba específica</p>
+              <p className="text-gray-600 mb-4">Gerencie suas publicações na página específica</p>
               <Button
                 onClick={() => navigate('/publications')}
                 className="bg-blue-600 hover:bg-blue-700"
@@ -77,7 +77,7 @@ const ProfileViewWrapper = ({ isEditable, children, researcherId }: ProfileViewW
         <TabsContent value="projects" className="mt-0">
           {isEditable ? (
             <div className="flex flex-col items-center justify-center py-8">
-              <p className="text-gray-600 mb-4">Gerencie seus projetos na aba específica</p>
+              <p className="text-gray-600 mb-4">Gerencie seus projetos na página específica</p>
               <Button
                 onClick={() => navigate('/projects')}
                 className="bg-blue-600 hover:bg-blue-700"
