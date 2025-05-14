@@ -1,5 +1,108 @@
 import researchersList from './mockResearchers';
 
+// Define joaoResearcher first
+export const joaoResearcher = {
+  name: "João da Silva",
+  orcidId: "0000-0002-1234-5678",
+  institution: "Universidade Federal de São Paulo",
+  department: "Departamento de Ciência da Computação",
+  role: "Professor Associado",
+  bio: "João da Silva é professor associado da Universidade Federal de São Paulo com foco em inteligência artificial e aprendizado de máquina. Possui doutorado pela USP e pós-doutorado pela Universidade de Stanford.",
+  email: "joao.silva@unifesp.edu.br",
+  researchAreas: ["Inteligência Artificial", "Aprendizado de Máquina", "Visão Computacional"],
+  education: [
+    "Ph.D. em Ciência da Computação, USP, 2010",
+    "Mestrado em Ciência da Computação, UNICAMP, 2006",
+    "Bacharelado em Ciência da Computação, UNIFESP, 2004"
+  ],
+  awards: [
+    "Pesquisador Destaque FAPESP, 2019",
+    "Melhor Artigo na Conferência Brasileira de IA, 2017"
+  ],
+  institutionalPage: "https://www.unifesp.br/docentes/joaosilva",
+  externalLinks: [
+    {
+      name: "Google Scholar",
+      url: "https://scholar.google.com/citations?user=joaosilva"
+    },
+    {
+      name: "ResearchGate",
+      url: "https://www.researchgate.net/profile/Joao-Silva-25"
+    }
+  ],
+  publications: [
+    {
+      id: "j1",
+      title: "Abordagens de Aprendizado Profundo para Detecção de Objetos em Tempo Real",
+      authors: [
+        { name: "João da Silva", orcidId: "0000-0002-1234-5678" },
+        { name: "Maria Santos", orcidId: "0000-0001-9876-5432" }
+      ],
+      year: 2022,
+      type: "Artigo",
+      source: "Revista Brasileira de Computação",
+      identifier: { type: "DOI", value: "10.1000/j.comp.2022.01.001" },
+      abstract: "Esta pesquisa apresenta uma nova abordagem para detecção de objetos em tempo real utilizando técnicas de aprendizado profundo, com foco em aplicações em dispositivos móveis.",
+      links: [
+        { name: "PDF", url: "https://example.com/paper1.pdf" }
+      ],
+      project: "p1"
+    },
+    {
+      id: "j2",
+      title: "Um Framework para Análise de Sentimentos em Português Brasileiro",
+      authors: [
+        { name: "João da Silva", orcidId: "0000-0002-1234-5678" },
+        { name: "Pedro Almeida", orcidId: "0000-0003-4567-8901" }
+      ],
+      year: 2021,
+      type: "Artigo",
+      source: "Conferência Internacional de PLN",
+      identifier: { type: "DOI", value: "10.1000/conf.pln.2021.05.012" },
+      abstract: "Apresentamos um framework completo para análise de sentimentos em textos escritos em português brasileiro, incluindo novos conjuntos de dados anotados e modelos pré-treinados.",
+      links: [
+        { name: "Código", url: "https://github.com/joaosilva/sentimento-pt-br" }
+      ],
+      project: "p2"
+    },
+    {
+      id: "j3",
+      title: "Modelos Generativos para Síntese de Imagens Médicas",
+      authors: [
+        { name: "João da Silva", orcidId: "0000-0002-1234-5678" }
+      ],
+      year: 2020,
+      type: "Capítulo de Livro",
+      source: "Avanços em IA para Medicina",
+      identifier: { type: "ISBN", value: "978-3-16-148410-0" },
+      abstract: "Este capítulo explora o uso de modelos generativos adversariais (GANs) para a síntese de imagens médicas, com aplicações em treinamento de algoritmos de diagnóstico automático.",
+      links: [],
+      project: "p1"
+    }
+  ],
+  projects: [
+    {
+      id: "p1",
+      name: "IA para Análise de Imagens Médicas",
+      description: "Desenvolvimento de técnicas de aprendizado profundo para análise automática de imagens médicas, com foco em detecção precoce de doenças.",
+      startYear: 2020,
+      endYear: 2023,
+      fundingAgency: "FAPESP",
+      role: "Coordenador"
+    },
+    {
+      id: "p2",
+      name: "PLN para Análise de Mídias Sociais",
+      description: "Aplicação de técnicas de processamento de linguagem natural para análise de conteúdo em mídias sociais em português brasileiro.",
+      startYear: 2019,
+      endYear: 2022,
+      fundingAgency: "CNPq",
+      role: "Pesquisador Principal"
+    }
+  ]
+};
+
+// Then define mockResearchers after joaoResearcher is defined
 export const mockResearchers = [
   ...researchersList,
   joaoResearcher,
@@ -172,107 +275,6 @@ export const mockResearcherData = {
       startYear: 2018,
       endYear: 2021,
       funding: "CAPES - Programa PROCAD"
-    }
-  ]
-};
-
-export const joaoResearcher = {
-  name: "João da Silva",
-  orcidId: "0000-0002-1234-5678",
-  institution: "Universidade Federal de São Paulo",
-  department: "Departamento de Ciência da Computação",
-  role: "Professor Associado",
-  bio: "João da Silva é professor associado da Universidade Federal de São Paulo com foco em inteligência artificial e aprendizado de máquina. Possui doutorado pela USP e pós-doutorado pela Universidade de Stanford.",
-  email: "joao.silva@unifesp.edu.br",
-  researchAreas: ["Inteligência Artificial", "Aprendizado de Máquina", "Visão Computacional"],
-  education: [
-    "Ph.D. em Ciência da Computação, USP, 2010",
-    "Mestrado em Ciência da Computação, UNICAMP, 2006",
-    "Bacharelado em Ciência da Computação, UNIFESP, 2004"
-  ],
-  awards: [
-    "Pesquisador Destaque FAPESP, 2019",
-    "Melhor Artigo na Conferência Brasileira de IA, 2017"
-  ],
-  institutionalPage: "https://www.unifesp.br/docentes/joaosilva",
-  externalLinks: [
-    {
-      name: "Google Scholar",
-      url: "https://scholar.google.com/citations?user=joaosilva"
-    },
-    {
-      name: "ResearchGate",
-      url: "https://www.researchgate.net/profile/Joao-Silva-25"
-    }
-  ],
-  publications: [
-    {
-      id: "j1",
-      title: "Abordagens de Aprendizado Profundo para Detecção de Objetos em Tempo Real",
-      authors: [
-        { name: "João da Silva", orcidId: "0000-0002-1234-5678" },
-        { name: "Maria Santos", orcidId: "0000-0001-9876-5432" }
-      ],
-      year: 2022,
-      type: "Artigo",
-      source: "Revista Brasileira de Computação",
-      identifier: { type: "DOI", value: "10.1000/j.comp.2022.01.001" },
-      abstract: "Esta pesquisa apresenta uma nova abordagem para detecção de objetos em tempo real utilizando técnicas de aprendizado profundo, com foco em aplicações em dispositivos móveis.",
-      links: [
-        { name: "PDF", url: "https://example.com/paper1.pdf" }
-      ],
-      project: "p1"
-    },
-    {
-      id: "j2",
-      title: "Um Framework para Análise de Sentimentos em Português Brasileiro",
-      authors: [
-        { name: "João da Silva", orcidId: "0000-0002-1234-5678" },
-        { name: "Pedro Almeida", orcidId: "0000-0003-4567-8901" }
-      ],
-      year: 2021,
-      type: "Artigo",
-      source: "Conferência Internacional de PLN",
-      identifier: { type: "DOI", value: "10.1000/conf.pln.2021.05.012" },
-      abstract: "Apresentamos um framework completo para análise de sentimentos em textos escritos em português brasileiro, incluindo novos conjuntos de dados anotados e modelos pré-treinados.",
-      links: [
-        { name: "Código", url: "https://github.com/joaosilva/sentimento-pt-br" }
-      ],
-      project: "p2"
-    },
-    {
-      id: "j3",
-      title: "Modelos Generativos para Síntese de Imagens Médicas",
-      authors: [
-        { name: "João da Silva", orcidId: "0000-0002-1234-5678" }
-      ],
-      year: 2020,
-      type: "Capítulo de Livro",
-      source: "Avanços em IA para Medicina",
-      identifier: { type: "ISBN", value: "978-3-16-148410-0" },
-      abstract: "Este capítulo explora o uso de modelos generativos adversariais (GANs) para a síntese de imagens médicas, com aplicações em treinamento de algoritmos de diagnóstico automático.",
-      links: [],
-      project: "p1"
-    }
-  ],
-  projects: [
-    {
-      id: "p1",
-      name: "IA para Análise de Imagens Médicas",
-      description: "Desenvolvimento de técnicas de aprendizado profundo para análise automática de imagens médicas, com foco em detecção precoce de doenças.",
-      startYear: 2020,
-      endYear: 2023,
-      fundingAgency: "FAPESP",
-      role: "Coordenador"
-    },
-    {
-      id: "p2",
-      name: "PLN para Análise de Mídias Sociais",
-      description: "Aplicação de técnicas de processamento de linguagem natural para análise de conteúdo em mídias sociais em português brasileiro.",
-      startYear: 2019,
-      endYear: 2022,
-      fundingAgency: "CNPq",
-      role: "Pesquisador Principal"
     }
   ]
 };
