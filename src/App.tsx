@@ -17,6 +17,7 @@ import ResearcherProfilePage from "./pages/ResearcherProfilePage";
 import EditPublicationPage from "./pages/EditPublicationPage";
 import EditProjectPage from "./pages/EditProjectPage";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/edit-publication/:id" element={<EditPublicationPage />} />
             <Route path="/edit-project/:id" element={<EditProjectPage />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
