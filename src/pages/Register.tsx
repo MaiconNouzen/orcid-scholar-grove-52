@@ -1,40 +1,15 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { Eye, EyeOff, UserPlus, Mail, Lock, User } from 'lucide-react';
+import { UserPlus, ExternalLink, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    // Simular registro
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log('Register attempt:', formData);
-    }, 2000);
+  const handleCreateOrcid = () => {
+    // Redirecionar para criação de conta ORCID
+    window.open('https://orcid.org/register', '_blank');
   };
 
   return (
@@ -49,178 +24,89 @@ const Register = () => {
             </div>
           </div>
           <h1 className="text-3xl font-bold text-blue-800 mb-2">ORCID Connect</h1>
-          <p className="text-gray-600">Crie sua conta de pesquisador</p>
+          <p className="text-gray-600">Crie ou conecte seu ORCID iD</p>
         </div>
 
         <Card className="shadow-lg border-0">
           <CardHeader className="space-y-1 pb-6">
             <CardTitle className="text-2xl font-semibold text-center">Criar Conta</CardTitle>
             <CardDescription className="text-center">
-              Preencha os dados para criar sua conta
+              Use seu ORCID iD para se conectar à plataforma
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nome completo</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Seu nome completo"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="seu@email.com"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password">Senha</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-                  <Input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Digite sua senha"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className="pl-10 pr-10"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirmar senha</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-                  <Input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
-                    placeholder="Confirme sua senha"
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
-                    className="pl-10 pr-10"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <input type="checkbox" className="rounded border-gray-300" required />
-                <label className="text-sm">
-                  Concordo com os{' '}
-                  <Link to="/terms" className="text-blue-600 hover:underline">
-                    Termos de Uso
-                  </Link>{' '}
-                  e{' '}
-                  <Link to="/privacy" className="text-blue-600 hover:underline">
-                    Política de Privacidade
-                  </Link>
-                </label>
-              </div>
-
+          <CardContent className="space-y-6">
+            <div className="text-center">
               <Button 
-                type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-700" 
-                disabled={isLoading}
+                onClick={handleCreateOrcid}
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-lg"
+                size="lg"
               >
-                {isLoading ? (
-                  <div className="flex items-center">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Criando conta...
-                  </div>
-                ) : (
-                  <div className="flex items-center">
-                    <UserPlus className="mr-2 h-4 w-4" />
-                    Criar conta
-                  </div>
-                )}
+                <div className="flex items-center justify-center">
+                  <svg className="mr-3 h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zM7.5 4.5c.83 0 1.5.67 1.5 1.5S8.33 7.5 7.5 7.5 6 6.83 6 6S6.67 4.5 7.5 4.5zm0 15c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm9-15h-3v3h-1.5V4.5h-3V3h3V0H15v3h3v1.5z"/>
+                  </svg>
+                  Criar ORCID iD
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </div>
               </Button>
-            </form>
+            </div>
 
-            <div className="mt-6">
-              <Separator className="my-4" />
-              <div className="text-center">
-                <p className="text-sm text-gray-600">
-                  Já tem uma conta?{' '}
-                  <Link to="/login" className="text-blue-600 hover:underline font-medium">
-                    Fazer login
-                  </Link>
+            <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 className="font-semibold text-green-800 mb-3 flex items-center">
+                <CheckCircle className="mr-2 h-5 w-5" />
+                Benefícios do ORCID iD
+              </h4>
+              <ul className="text-green-700 text-sm space-y-2">
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>Identificador único e permanente para pesquisadores</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>Conecta automaticamente suas publicações e projetos</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>Reconhecido internacionalmente por editoras e agências</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>Simplifica submissões de manuscritos e propostas</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="text-center text-sm text-gray-600">
+              <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <h4 className="font-semibold text-blue-800 mb-2">Como funciona?</h4>
+                <p className="text-blue-700 text-xs leading-relaxed">
+                  1. Clique em "Criar ORCID iD" para ser redirecionado ao site oficial<br />
+                  2. Preencha seus dados e crie sua conta gratuita<br />
+                  3. Retorne e faça login com seu novo ORCID iD
                 </p>
               </div>
             </div>
 
-            <div className="mt-6">
-              <Button variant="outline" className="w-full" type="button">
-                <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                  />
-                  <path
-                    fill="currentColor"
-                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                  />
-                  <path
-                    fill="currentColor"
-                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                  />
-                  <path
-                    fill="currentColor"
-                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                  />
-                </svg>
-                Registrar com Google
-              </Button>
+            <Separator className="my-6" />
+
+            <div className="text-center">
+              <p className="text-sm text-gray-600">
+                Já tem um ORCID iD?{' '}
+                <Link to="/login" className="text-blue-600 hover:underline font-medium">
+                  Fazer login
+                </Link>
+              </p>
             </div>
           </CardContent>
         </Card>
 
         <div className="text-center mt-6 text-sm text-gray-500">
           <p>
-            Ao criar uma conta, você concorda com nossos{' '}
-            <Link to="/terms" className="underline hover:text-gray-700">
-              Termos de Uso
-            </Link>{' '}
-            e{' '}
+            Ao criar uma conta ORCID, você concorda com os{' '}
+            <a href="https://orcid.org/content/orcid-terms-use" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700">
+              Termos de Uso do ORCID
+            </a>{' '}
+            e nossa{' '}
             <Link to="/privacy" className="underline hover:text-gray-700">
               Política de Privacidade
             </Link>
