@@ -8,8 +8,8 @@ import { ArrowLeft } from 'lucide-react';
 import { mockResearchers, mockResearcherData } from '../data/mockData';
 import { Researcher } from '../types';
 import ResearcherProfile from '../components/ResearcherProfile';
-import PublicationSection from '../components/PublicationSection';
-import ProjectSection from '../components/ProjectSection';
+import OtherResearcherPublications from '../components/OtherResearcherPublications';
+import OtherResearcherProjects from '../components/OtherResearcherProjects';
 import { toast } from '@/components/ui/use-toast';
 
 const ResearcherProfilePage = () => {
@@ -124,11 +124,11 @@ const ResearcherProfilePage = () => {
           </TabsContent>
           
           <TabsContent value="publicacoes" className="mt-0">
-            <PublicationSection publications={researcher.publications} />
+            <OtherResearcherPublications publications={researcher.publications} />
           </TabsContent>
           
           <TabsContent value="projetos" className="mt-0">
-            <ProjectSection projects={researcher.projects} publications={researcher.publications} />
+            <OtherResearcherProjects projects={researcher.projects} publications={researcher.publications} />
           </TabsContent>
         </Tabs>
       </div>
