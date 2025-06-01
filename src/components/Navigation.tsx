@@ -34,7 +34,7 @@ const Navigation = () => {
                   <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-8a1 1 0 0 0 2 0V7a1 1 0 0 0-2 0v5zm1-8.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" fill="currentColor"/>
                 </svg>
               </div>
-              <span className="ml-2 text-xl font-bold text-blue-800">ORCID Connect</span>
+              <span className="ml-2 text-xl font-bold text-blue-800">ORCID++</span>
             </Link>
           </div>
           

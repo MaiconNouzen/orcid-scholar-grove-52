@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,7 +8,7 @@ const Home = () => {
   return (
     <div className="container mx-auto px-4 py-8 max-w-5xl">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-blue-800 mb-4">ORCID Connect</h1>
+        <h1 className="text-3xl font-bold text-blue-800 mb-4">ORCID++</h1>
         <p className="text-gray-600 text-lg mb-6">
           Conectando pesquisadores, compartilhando conhecimento científico
         </p>
@@ -77,7 +76,7 @@ const Home = () => {
       </div>
       
       <Card className="p-6 bg-blue-50 border-blue-200 mb-8">
-        <h2 className="text-2xl font-bold text-blue-800 mb-4 text-center">Benefícios do ORCID Connect</h2>
+        <h2 className="text-2xl font-bold text-blue-800 mb-4 text-center">Benefícios do ORCID++</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-4">
             <h3 className="text-lg font-semibold text-blue-700 mb-2">Para Pesquisadores</h3>

@@ -23,7 +23,7 @@ const Login = () => {
               </svg>
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-blue-800 mb-2">ORCID Connect</h1>
+          <h1 className="text-3xl font-bold text-blue-800 mb-2">ORCID++</h1>
           <p className="text-gray-600">Entre com sua conta ORCID</p>
         </div>
 
