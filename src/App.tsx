@@ -15,6 +15,7 @@ import Navigation from "./components/Navigation";
 import ResearcherProfilePage from "./pages/ResearcherProfilePage";
 import EditPublicationPage from "./pages/EditPublicationPage";
 import EditProjectPage from "./pages/EditProjectPage";
+import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/researcher/:id" element={<ResearcherProfilePage />} />
             <Route path="/edit-publication/:id" element={<EditPublicationPage />} />
             <Route path="/edit-project/:id" element={<EditProjectPage />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
