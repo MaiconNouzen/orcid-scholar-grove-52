@@ -1,42 +1,1031 @@
-#root {
-  max-width: 1280px;
+
+/* Reset e configurações globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8fafc;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 80px;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 1000;
+  height: 70px;
+}
+
+.navbar-container {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar-brand {
+  text-decoration: none;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.logo-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1e40af;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #64748b;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #1e40af;
+  background-color: #dbeafe;
+}
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background-color: #1e40af;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: #64748b;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #475569;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #1e40af;
+  border: 1px solid #1e40af;
+}
+
+.btn-outline:hover {
+  background-color: #1e40af;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+/* Container geral */
+.home-container,
+.perfil-container,
+.publicacoes-container,
+.projetos-container,
+.buscar-container,
+.editar-perfil-container,
+.login-container,
+.editar-publicacao-container,
+.editar-projeto-container,
+.pesquisador-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Home page */
+.hero-section {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.features-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.feature-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+.feature-link {
+  color: #1e40af;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.feature-link:hover {
+  text-decoration: underline;
+}
+
+.benefits-section {
+  background: #dbeafe;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #93c5fd;
+}
+
+.benefits-section h2 {
+  text-align: center;
+  color: #1e40af;
+  margin-bottom: 2rem;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.benefit-column h3 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+.benefit-column ul {
+  list-style-position: inside;
+  color: #374151;
+}
+
+.benefit-column li {
+  margin-bottom: 0.5rem;
+}
+
+/* Profile */
+.profile-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dbeafe;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  width: 6rem;
+  height: 6rem;
+  background: #1e40af;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profile-info h1 {
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.institution {
+  color: #1e40af;
+  font-weight: 500;
+}
+
+.department {
+  color: #64748b;
+}
+
+.orcid-badge {
+  background: #1e40af;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+.orcid-badge a {
+  color: white;
+  text-decoration: none;
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.bio-section,
+.publications-section,
+.projects-section,
+.links-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  color: #374151;
+}
+
+.research-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.research-tag {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+
+.publication-item,
+.project-item {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.publication-item:last-child,
+.project-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.publication-item h3,
+.project-item h3 {
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.authors {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.publication-meta,
+.project-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.pub-type,
+.pub-year {
+  background: #f1f5f9;
+  color: #374151;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.links-list {
+  list-style: none;
+}
+
+.links-list li {
+  margin-bottom: 0.5rem;
+}
+
+.links-list a {
+  color: #1e40af;
+  text-decoration: none;
+}
+
+.links-list a:hover {
+  text-decoration: underline;
+}
+
+/* Pages header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  color: #1e40af;
+}
+
+/* Search */
+.search-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dbeafe;
+  margin-bottom: 2rem;
+}
+
+.search-input,
+.search-input-large {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
+.search-input-large {
+  padding: 1rem;
+  font-size: 1.125rem;
+}
+
+.filter-section {
+  margin-top: 1rem;
+}
+
+.filter-select {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background: white;
+}
+
+/* Cards */
+.publication-card,
+.project-card,
+.researcher-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+
+.publication-card:hover,
+.project-card:hover,
+.researcher-card:hover {
+  border-color: #93c5fd;
+}
+
+.publications-grid,
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+}
+
+/* Researchers list */
+.researchers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.researcher-card {
+  display: flex;
+  gap: 1.5rem;
+  cursor: pointer;
+}
+
+.researcher-avatar {
+  width: 4rem;
+  height: 4rem;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.researcher-info h2 {
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.researcher-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.detail-item {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.researcher-actions {
+  margin-top: 1rem;
+}
+
+/* Forms */
+.profile-form,
+.publication-form,
+.project-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-section h2 {
+  color: #374151;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Research areas manager */
+.research-areas-manager {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 1rem;
+}
+
+.current-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.area-tag {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.add-area {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Authors management */
+.authors-list {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 1rem;
+}
+
+.author-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+/* Login */
+.login-card {
+  max-width: 400px;
+  margin: 4rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-large {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.login-header h1 {
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.login-content h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.login-content > p {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.orcid-login-btn {
+  width: 100%;
+  background: #16a34a;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  transition: background-color 0.2s;
+}
+
+.orcid-login-btn:hover {
+  background: #15803d;
+}
+
+.orcid-icon {
+  font-size: 1.5rem;
+}
+
+.external-icon {
+  font-size: 1rem;
+}
+
+.login-info {
+  background: #dbeafe;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #93c5fd;
+  margin-bottom: 1.5rem;
+}
+
+.login-info h4 {
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.login-info p {
+  color: #1e40af;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.login-footer {
+  text-align: center;
+}
+
+.login-footer a {
+  color: #1e40af;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+.terms {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.terms a {
+  color: #64748b;
+  text-decoration: underline;
+}
+
+/* Researcher profile */
+.researcher-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dbeafe;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.researcher-avatar-large {
+  width: 6rem;
+  height: 6rem;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.researcher-tabs {
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+  border-radius: 0.375rem;
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #64748b;
+  transition: all 0.2s;
+}
+
+.tab-button.active {
+  background: white;
+  color: #1e40af;
+}
+
+.tab-button:hover {
+  color: #1e40af;
+}
+
+.tab-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.research-areas-section {
+  margin-bottom: 2rem;
+}
+
+.research-areas-section h3 {
+  margin-bottom: 1rem;
+  color: #374151;
+}
+
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e40af;
+}
+
+.stat-label {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+/* Progress bar */
+.progress-section {
+  margin: 1rem 0;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  background: #e2e8f0;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #1e40af;
+  transition: width 0.3s ease;
+}
+
+/* Timeline */
+.project-timeline {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+}
+
+.project-funding {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+/* Actions */
+.publication-actions,
+.project-actions,
+.researcher-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.action-link {
+  color: #1e40af;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.action-link:hover {
+  text-decoration: underline;
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: color 0.2s;
+}
+
+.action-button:hover {
+  color: #1e40af;
+}
+
+/* Empty states */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #64748b;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.empty-message {
+  color: #64748b;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-message {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #fecaca;
+  text-align: center;
+}
+
+.error-message h2 {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .profile-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .profile-header,
+  .researcher-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .researcher-card {
+    flex-direction: column;
+  }
+  
+  .publications-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .author-row {
+    flex-direction: column;
+  }
+  
+  .researcher-details {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 70px;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  
+  .home-container,
+  .perfil-container,
+  .publicacoes-container,
+  .projetos-container,
+  .buscar-container,
+  .editar-perfil-container,
+  .login-container,
+  .editar-publicacao-container,
+  .editar-projeto-container,
+  .pesquisador-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .feature-card {
+    padding: 1rem;
+  }
+  
+  .benefits-section {
+    padding: 1.5rem;
+  }
 }
